@@ -15,4 +15,13 @@ Note: Consumer Classic - 5MB/Sec read capacity per shard across all consumers
       Consumer Enhanced Fan-Out - 5MB/Sec read capacity per shard per enhanced consumer
 6. The total capacity of a stram is the sum of capacities of all the shards
 7. A partition key in a data record is a unicode string of max size 256 bytes. The sequence number is unique per partition key in a shard.
+8. Kinesis Data Stream supports following producers -
+      a. SDK
+      b. Kinesis Producer Library (KPL)
+      c. Kinesis Agent
+      d. 3rd Party libraries (Spark, Log4j, kafka etc.)
+9. Kinesis SDK can 2 methods for data ingestion - PutRecord (single data record) and PutRecords (for multiple insert in batch mode)
+10. Kinesis SDK is used for low throughput, higher latency integrations. It creates simple API/Lambda integration
+11. ProvisionedThroughputExceeded Exceptions happens when sending more data (exceeding MB/s or TPS for any shard)
+12. 
 
