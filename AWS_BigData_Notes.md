@@ -23,5 +23,25 @@ Note: Consumer Classic - 5MB/Sec read capacity per shard across all consumers
 9. Kinesis SDK can 2 methods for data ingestion - PutRecord (single data record) and PutRecords (for multiple insert in batch mode)
 10. Kinesis SDK is used for low throughput, higher latency integrations. It creates simple API/Lambda integration
 11. ProvisionedThroughputExceeded Exceptions happens when sending more data (exceeding MB/s or TPS for any shard)
-12. 
+12. Kinesis Producer Library (KPL) is set of C++ & Java libraries. This is used for high performance and long running streaming jobs
+13. Kinesis Agent is a Java based program built on top of KPL. I can be installed on Linux based servers. It is used mainly for log data ingestion.
+
+
+
+Amazon S3:
+
+1. Buckets must have globally unique name
+2. Max size of a file in S3 is 5 TB. If size is more than 100 MB then multi-part upload should be used. It is must for file size > 5 GB
+3. Read after Write consistency for PUTs of new objects. Eventual consistency for DELETEs and PUTs of existing objects
+4. S3 storage tiers -
+      a. s3 standard - general purpose - 99.99% availability
+      b. s3 standard - Infrequently access (IA) - monthly access - 99.9% availability
+      c. s3 one zone - Infrequently access - less durability - 99.5% avilability
+      d. s3 intelligent tiering (new!) - data automatically moves to right tier based on usage
+      e. Amazon glacier - archived data - Each item is called Archive; the archives are stored in vaults.
+5. Glacier data retrieval -
+      a. expedited - 1-5 min
+      b. standard - 3-5 hours
+      c. bulk - 5-12 hours
+
 
