@@ -43,5 +43,12 @@ Amazon S3:
       a. expedited - 1-5 min
       b. standard - 3-5 hours
       c. bulk - 5-12 hours
+6. For cross region replication, versioning must be enabled for both the buckets.
+7. AWS s3 E-Tag is used to verify the integrity of the file.For file size < 5GB, it is done based on MD5 hash value
+8. s3 performance may degrade when TPS > 100. 
+9. Add random characters in front of the object name to distribute the objects to many partitions.Never use dates for pre-fix keys
+10. Currenly s3 supports 3500 RPS for PUT and 5500 RPS for GET for each prefix
+11. s3 cloudFront is used to cache s3 content.s3 transfer acceleration uses Edge locations
+
 
 
