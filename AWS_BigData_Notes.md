@@ -67,7 +67,12 @@ Note: Consumer Classic - 2 MB/Sec read capacity per shard across all consumers
  2. Default retention of SQS is 4 days and maximum reyention is 14 days. Max size of each message is 256 KB
  3. AWS SQS-FIFO has lower throughput - upto 3000 messages/sec. Messages are processed in order by the consumer. Messages are sent only once to the consumer.
  4. Messages of size larger than 256 KB can be sent to consumer using SQS Extended client (Java library). 
-
+ 
+ Data Movement into AWS:
+ 
+ 1. Direct Connect
+ 2. Database Migration Service (DMS)
+ 3. Snowball + SnowMobil + Snowball Edge (storage + compute)
 
 
 Amazon S3:
@@ -85,12 +90,15 @@ Amazon S3:
       a. expedited - 1-5 min
       b. standard - 3-5 hours
       c. bulk - 5-12 hours
-6. For cross region replication, versioning must be enabled for both the buckets.
-7. AWS s3 E-Tag is used to verify the integrity of the file.For file size < 5GB, it is done based on MD5 hash value
-8. s3 performance may degrade when TPS > 100. 
-9. Add random characters in front of the object name to distribute the objects to many partitions.Never use dates for pre-fix keys
-10. Currenly s3 supports 3500 RPS for PUT and 5500 RPS for GET for each prefix
-11. s3 cloudFront is used to cache s3 content.s3 transfer acceleration uses Edge locations
+6. Glacier provides vault lock feature that enable users to implement WORM (write once read many) requirement. Control over a vault can be enforced using vault lock policy. Policy cannot be changed after locking.
+7. Vault Lock life-cycle:
+      Attach a lock policy to the vault -----> lock is set to In-Progress state -----> users have 24 hours to validate the lock -----> complete the lock -----> vault lock goes to Locked state (Immutable).
+8. For cross region replication, versioning must be enabled for both the buckets.
+9. AWS s3 E-Tag is used to verify the integrity of the file.For file size < 5GB, it is done based on MD5 hash value
+10. s3 performance may degrade when TPS > 100. 
+11. Add random characters in front of the object name to distribute the objects to many partitions.Never use dates for pre-fix keys
+12. Currenly s3 supports 3500 RPS for PUT and 5500 RPS for GET for each prefix
+12. s3 cloudFront is used to cache s3 content.s3 transfer acceleration uses Edge locations
 
 
 
