@@ -59,6 +59,14 @@ Note: Consumer Classic - 2 MB/Sec read capacity per shard across all consumers
  2. KFS supports data ingestion into - s3, RedShift, ElasticSearch and Splunk. Lambda function can be invoked to transform the data out from KFS before sending the same to the target.
  3. Firehose supports compression of data when the target is s3 (GZIP, ZIP, SNAPPY)
  4. Firehose buffers the data before sending it to the target. The buffer is flushed based on the buffer size and timing rule. For Lambda, the maximum buffer size can be 3 MB.
+ 
+ 
+ Simple Queue Service (SQS):
+ 
+ 1. It is a fully managed queue service on AWS. SQS can scale from 1 message to 10000 messages/sec.
+ 2. Default retention of SQS is 4 days and maximum reyention is 14 days. Max size of each message is 256 KB
+ 3. AWS SQS-FIFO has lower throughput - upto 3000 messages/sec. Messages are processed in order by the consumer. Messages are sent only once to the consumer.
+ 4. Messages of size larger than 256 KB can be sent to consumer using SQS Extended client (Java library). 
 
 
 
