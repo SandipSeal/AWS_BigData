@@ -100,5 +100,13 @@ Amazon S3:
 12. Currenly s3 supports 3500 RPS for PUT and 5500 RPS for GET for each prefix
 12. s3 cloudFront is used to cache s3 content.s3 transfer acceleration uses Edge locations
 
+Amazon DynamoDB:
+1. Fully managed; supports both key/value and document data models.
+2. DynamoDB is highly scalable, highly available. It uses SSD for storage
+3. Each table in DynamoDB must have a primary key; primary key must be selected at the time of table creation. Each row in DynamoDB table is called an item. The maximum size of an item can be 400 KB. 
+4. RCU and WCU of a table are split across all the partitions in a table. If RCU is 100 and the table has 4 partitions then each partition will get 25 RCU.
+5. A single parition can hold only 10GB of data. Each parition can support max 3000 RCU and 1000 WCU. Partition can be increased but cannot be decreased.
+6. 
+
 
 
