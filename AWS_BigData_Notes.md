@@ -106,7 +106,18 @@ Amazon DynamoDB:
 3. Each table in DynamoDB must have a primary key; primary key must be selected at the time of table creation. Each row in DynamoDB table is called an item. The maximum size of an item can be 400 KB. 
 4. RCU and WCU of a table are split across all the partitions in a table. If RCU is 100 and the table has 4 partitions then each partition will get 25 RCU.
 5. A single parition can hold only 10GB of data. Each parition can support max 3000 RCU and 1000 WCU. Partition can be increased but cannot be decreased.
-6. 
+6. Amazon DynamoDB RCU & WCU
+WCU: 1 WCU = 1 write per second for an item of size upto 1 KB.
+RCU: 1 RCU = 1 Strong consistent read or 2 eventual consistent read per second for an item of size upto 4 KB
+7. If RCU/WCU are exceed then 'ProvisionedThroughputExceededException' occurs
+8 Calculating the number of partitions required in a DynamoDB table:
+      By Capacity = Total size of the table / 10GB
+      By throughput = (RCU/3000) + (WCU/1000)
+      # Partitions = Max (capacity,throughput)
+9. DynamoDB supports 2 types of indeces - Local Secondary Index (LSI) and Global Secondary Index (GSI)
+      LSI - This must be created at the time of table creation. LSI is local to the table partition key
+      GSI - This can be added to the table after creation. GSI creates a table under the hood for maintaining the index. User needs to define RCU & WCU separately for the index.
+
 
 
 
