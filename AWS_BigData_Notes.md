@@ -113,11 +113,14 @@ RCU: 1 RCU = 1 Strong consistent read or 2 eventual consistent read per second f
 8 Calculating the number of partitions required in a DynamoDB table:
       By Capacity = Total size of the table / 10GB
       By throughput = (RCU/3000) + (WCU/1000)
-      # Partitions = Max (capacity,throughput)
+      Num Partitions = Max (capacity,throughput)
 9. DynamoDB supports 2 types of indeces - Local Secondary Index (LSI) and Global Secondary Index (GSI)
       LSI - This must be created at the time of table creation. LSI is local to the table partition key
       GSI - This can be added to the table after creation. GSI creates a table under the hood for maintaining the index. User needs to define RCU & WCU separately for the index.
-
+10. DynamoDB DAX is a cache layer on top of DynamoDB. 
+11. DynamoDB change logs can be sent to a stream (can be enabled at table level). DynamoDB stream can be consumed by Lambda function for appropriate actions; also the stream can be consumed by Kinesis (using KCL library). Data is retained in streams for 24 hours.
+12. DynamoDB TTL defines the timestamp till which an item will be valid in a table. Once the TTL is passed the respective items will be expired in the table and won't consume any WCU/RCU. DynamoDB typically deletes the expired item within 48 hours of expiry.
+13. The deleted items due to TTL also deletes the items in index tables (in case of GSI).
 
 
 
