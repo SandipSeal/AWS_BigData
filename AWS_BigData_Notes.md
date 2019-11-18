@@ -122,5 +122,18 @@ RCU: 1 RCU = 1 Strong consistent read or 2 eventual consistent read per second f
 12. DynamoDB TTL defines the timestamp till which an item will be valid in a table. Once the TTL is passed the respective items will be expired in the table and won't consume any WCU/RCU. DynamoDB typically deletes the expired item within 48 hours of expiry.
 13. The deleted items due to TTL also deletes the items in index tables (in case of GSI).
 
+Amazon Redshift:
+
+1. Fully managed data warehouse in AWS cloud. This is a petabyte scale, column oriented datastore.
+2. Redshift Architecture : Leader Node & Compute Nodes. The EC2 compute nodes are in single AZ. Client tools connect to the Leader Node.The default port is 5439.
+3. Leader node parses the SQL and derive the execution plan. Leader Node also stores the metadata (system tables).
+4. Each compute node has its own compute and storage. Each compute node can be scaled in/out and up/down. Each compute node consists of Node slices (portion of memory and disk). Number of slices depends on the type of nodes.
+5. Dense Compute Node & Dense Storage Nodes. Reserved Instance Pricing is available for Amazon Redshift
+6. Amazon s3 is the main source of loading data into Redshift. COPY command example below:
+      COPY <Table Name> <s3 bucket/path> CREDENTIALS <credential>
+7. COPY command can load data from DynamoDB, EMR, EC2 instance. AWS Data Pipeline can automate the ETL workflow. Also, AWS DMS can be used to migrate data into Redshift. Data can be loaded into Redshift using Kinesis.
+10. Data can be exported to s3 using the UNLOAD command.
+
+
 
 
