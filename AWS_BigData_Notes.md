@@ -133,7 +133,16 @@ Amazon Redshift:
       COPY <Table Name> <s3 bucket/path> CREDENTIALS <credential>
 7. COPY command can load data from DynamoDB, EMR, EC2 instance. AWS Data Pipeline can automate the ETL workflow. Also, AWS DMS can be used to migrate data into Redshift. Data can be loaded into Redshift using Kinesis.
 10. Data can be exported to s3 using the UNLOAD command.
-
+11. Redshift is a columnar database. It provides efficiency in data storage. Single line insert performs poorly in Redshift.
+12. Primary Key and Foreign Key can be created in Redshift but referential integrity is not maintained in the database. 
+13. REdshift support 3 dustribution styles -
+      Even: Rows are distributed across the slices regardless of the value in a particular column.This is default distribution style.
+      Key Distribution: Same keys reside in the same slice. Usefule for large table joins.
+      All: Entire Table is copied into each slide. Good for small dimension/lookup tables
+14. Redshift stores data in filesystem in the sorted order of sort key. Block-size in Redshift is 1 MB. Zone maps keep track of the min & max value in each block. If the data is not loaded in the order of the sort key then all the blocks will be scanned; vaccum command will be needed to be performed. 
+15. 2 types of the sort key - compound & interleaved. With compound sort keys table is sorted by column values listed in the sort key order. Query performance may be degraded if it does include the primary sort column.
+16. Interleaved sort key gives equal importance to all the sort columns. Data loading/vacuum operation is slower with interleave sort keys. It is useful for very large tables only. Not good for the table where data is loaded in sort orders.
+17. Redshift support compression scheme at each column level. Compression scheme can be defined during table creation. AWS recomends automatic compression. Once data is loaded first time into the table, compression is automatically applied by AWS. Compression can be applied manually using analyze command. Analyse commands provide suggestion for compression and after that DDL hasto be updated manually.
 
 
 
