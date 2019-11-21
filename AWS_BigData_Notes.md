@@ -143,6 +143,21 @@ Amazon Redshift:
 15. 2 types of the sort key - compound & interleaved. With compound sort keys table is sorted by column values listed in the sort key order. Query performance may be degraded if it does include the primary sort column.
 16. Interleaved sort key gives equal importance to all the sort columns. Data loading/vacuum operation is slower with interleave sort keys. It is useful for very large tables only. Not good for the table where data is loaded in sort orders.
 17. Redshift support compression scheme at each column level. Compression scheme can be defined during table creation. AWS recomends automatic compression. Once data is loaded first time into the table, compression is automatically applied by AWS. Compression can be applied manually using analyze command. Analyse commands provide suggestion for compression and after that DDL hasto be updated manually.
+18. Table constraints (except NOT NULL) is not physically enforced in Redshift.
+19. Data in s3 can be easily loaded into Redshift using simple COPY command. Other than s3, data can be directly loaded from AWS EMR, EC2 instance and DynamoDB. Kinesis, Kinesis Firehose, AWS DMS loads data first to s3 before loading the same into Redshift. 
+20. Transfering data to AWS - upload to s3 over internet, Direct Connect, AWS Export/Import, Snowball/Snowmobil. 
+21. Splitting a lagre data file into smaller chunks enhances the performance of the COPY command. Number of data files should be equal oor multiple of the number of slices. 
+22. Large files can be compressed before loading - gzip, lzip, bzip2. File size should be even size as possible. File size after after split should be of size betweeen 1 MB to 1 GB.
+23. Manifest - 
+      Load required files only
+      Load from different s3 buckets
+      Load files with different prefix
+manifest is defined in JSON format. 
+24. File formats supported by COPY command - CSV, delimited, fixed width, JSON, Avro. 
+25. Error checking - STL_LOAD_ERRORS, STL_LOADERROR_DETAIL. These 2 tables can be joined for more detailed info. 
+26. UPSERT is not supported in Redshift. Need to use combination of delete & insert or update (by joining target & staging tables)
+27. COPY command can load encrypted files in s3. COPY command can load files encrypted using SSE s3, SSE-KMS; also supports client side encryption using client-side symmetric master key. SSE-C, client side encryption using KMS, client side encruption using asymmetric master key is not supported in COPY command. 
+28. UNLOAD command exports data to one or more files in s3. Automatically applies SSE-s3 encryption. UNLOAD supports SSE-KMS and client side encryption using customer-managed key (CSE-CMK). UNLOAD does not support SSE-C encryption. 
 
 
 
