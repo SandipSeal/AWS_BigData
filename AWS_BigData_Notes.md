@@ -157,7 +157,12 @@ manifest is defined in JSON format.
 25. Error checking - STL_LOAD_ERRORS, STL_LOADERROR_DETAIL. These 2 tables can be joined for more detailed info. 
 26. UPSERT is not supported in Redshift. Need to use combination of delete & insert or update (by joining target & staging tables)
 27. COPY command can load encrypted files in s3. COPY command can load files encrypted using SSE s3, SSE-KMS; also supports client side encryption using client-side symmetric master key. SSE-C, client side encryption using KMS, client side encruption using asymmetric master key is not supported in COPY command. 
-28. UNLOAD command exports data to one or more files in s3. Automatically applies SSE-s3 encryption. UNLOAD supports SSE-KMS and client side encryption using customer-managed key (CSE-CMK). UNLOAD does not support SSE-C encryption. 
+28. UNLOAD command exports data to one or more files in s3. Automatically applies SSE-s3 encryption. UNLOAD supports SSE-KMS and client side encryption using customer-managed key (CSE-CMK). UNLOAD does not support SSE-C encryption.
+29. Redshift blocks are immutable; i.e. Updates result in a new block and Deleted rows are not removed from disk. VACUUM command recovers the storage space and sorts the data.
+30. Variations of VACUUM - FULL, SORT, DELETE ONLY, REINDEX. This operation is I/O intensive; hence should be run during the maintenance window. 
+31. Performing DEEP COPY on a very large table is much faster than running VACUUM command. DEEP COPY recreates and populates the table with a bulk insert. VACUUM command is not recomended on a table of size > 700 GB.
+32. Redshift snapshots can be automated or manual. Automatic snapshot is taken every 8 hours or every 5 GB of data change. Redshift also allows cross-region snapshot/backup. 
+33. If the Redshift cluster is encryted then snapshot will also be encrypted. When Redshift is restored from a snapshot a new cluster is created using same configuration.
 
 
 
