@@ -79,13 +79,15 @@ Amazon S3:
 
 1. Buckets must have globally unique name
 2. Max size of a file in S3 is 5 TB. If size is more than 100 MB then multi-part upload should be used. It is must for file size > 5 GB
-3. Read after Write consistency for PUTs of new objects. Eventual consistency for DELETEs and PUTs of existing objects
+3. Read after Write consistency for PUTs of new objects. Eventual consistency for DELETEs and PUTs of existing objects. GET after PUT returns code 200 except the situation where one had performed a GET before the PUT to check if the object existed. 
 4. S3 storage tiers -
-      a. s3 standard - general purpose - 99.99% availability
-      b. s3 standard - Infrequently access (IA) - monthly access - 99.9% availability
-      c. s3 one zone - Infrequently access - less durability - 99.5% avilability
-      d. s3 intelligent tiering (new!) - data automatically moves to right tier based on usage
-      e. Amazon glacier - archived data - Each item is called Archive; the archives are stored in vaults.
+      a. s3 standard - general purpose - 99.99% availability. Durability is 11'9. Data is replicated in 3 AZs.
+      b. s3 standard - Infrequently access (IA) - monthly access - 99.9% availability. There is a charge when the data is accessed.
+      c. s3 one zone - Infrequently access - less durability - 99.5% avilability. Cost is lower than s3 IA.
+      d. s3 intelligent tiering (new!) - data automatically moves to right tier based on usage. 99.9% availability.
+      e. Amazon glacier - archived data - Each item is called Archive; the archives are stored in vaults. The size of each archive can be upto 40TB.
+      f. s3 RRS - Reduced Redundancy Storage. This tier has less durability.
+   Storage class can be selected at the time of file upload.
 5. Glacier data retrieval -
       a. expedited - 1-5 min
       b. standard - 3-5 hours
@@ -93,12 +95,14 @@ Amazon S3:
 6. Glacier provides vault lock feature that enable users to implement WORM (write once read many) requirement. Control over a vault can be enforced using vault lock policy. Policy cannot be changed after locking.
 7. Vault Lock life-cycle:
       Attach a lock policy to the vault -----> lock is set to In-Progress state -----> users have 24 hours to validate the lock -----> complete the lock -----> vault lock goes to Locked state (Immutable).
-8. For cross region replication, versioning must be enabled for both the buckets.
+8. For cross region replication, versioning must be enabled for both the buckets. Buckets can be in different accounts.We can change the storage class of the target bucket. Replication happens only for the new files i.e. the files uploaded after enabling the replication option.
 9. AWS s3 E-Tag is used to verify the integrity of the file.For file size < 5GB, it is done based on MD5 hash value
 10. s3 performance may degrade when TPS > 100. 
 11. Add random characters in front of the object name to distribute the objects to many partitions.Never use dates for pre-fix keys
 12. Currenly s3 supports 3500 RPS for PUT and 5500 RPS for GET for each prefix
 12. s3 cloudFront is used to cache s3 content.s3 transfer acceleration uses Edge locations
+13. s3 LifeCycle Rule ---> Transition Action or Expiry Action. LifeCycle is present under Management tab. Users can apply filter while confuguring lifecycle policies.
+14. Versioning at bucket level safeguards against accidental delete. If versioning is enabled then file cannot be deleted from UI; it just creates a delete marker.
 
 Amazon DynamoDB:
 1. Fully managed; supports both key/value and document data models.
@@ -121,6 +125,7 @@ RCU: 1 RCU = 1 Strong consistent read or 2 eventual consistent read per second f
 11. DynamoDB change logs can be sent to a stream (can be enabled at table level). DynamoDB stream can be consumed by Lambda function for appropriate actions; also the stream can be consumed by Kinesis (using KCL library). Data is retained in streams for 24 hours.
 12. DynamoDB TTL defines the timestamp till which an item will be valid in a table. Once the TTL is passed the respective items will be expired in the table and won't consume any WCU/RCU. DynamoDB typically deletes the expired item within 48 hours of expiry.
 13. The deleted items due to TTL also deletes the items in index tables (in case of GSI).
+14. All the changes (Insert/Update/Delete) made to a DynamoDB table are sent to a stream. DynamoDB stream can be read by AWS Lambda. Stream persists the data for max 24 hours. DynamoDB stream can also feed Kinesis using KCL.
 
 Amazon Redshift:
 
