@@ -97,12 +97,19 @@ Amazon S3:
       Attach a lock policy to the vault -----> lock is set to In-Progress state -----> users have 24 hours to validate the lock -----> complete the lock -----> vault lock goes to Locked state (Immutable).
 8. For cross region replication, versioning must be enabled for both the buckets. Buckets can be in different accounts.We can change the storage class of the target bucket. Replication happens only for the new files i.e. the files uploaded after enabling the replication option.
 9. AWS s3 E-Tag is used to verify the integrity of the file.For file size < 5GB, it is done based on MD5 hash value
-10. s3 performance may degrade when TPS > 100. 
+10. s3 performance may degrade when TPS > 100. Data goes into different partitions. 
 11. Add random characters in front of the object name to distribute the objects to many partitions.Never use dates for pre-fix keys
 12. Currenly s3 supports 3500 RPS for PUT and 5500 RPS for GET for each prefix
-12. s3 cloudFront is used to cache s3 content.s3 transfer acceleration uses Edge locations
+12. s3 cloudFront is used to cache s3 content (improves reads).s3 transfer acceleration uses Edge locations (improves writes).
 13. s3 LifeCycle Rule ---> Transition Action or Expiry Action. LifeCycle is present under Management tab. Users can apply filter while confuguring lifecycle policies.
 14. Versioning at bucket level safeguards against accidental delete. If versioning is enabled then file cannot be deleted from UI; it just creates a delete marker.
+15. AWS s3 encryption options -
+      SSE-s3: Encryption keys are handled and managed by AWS. Must set the header. It uses 265 bit encryption key.
+      SSE-KMS: Data key (CMK) is managed in KMS. Must set the header. 
+      SSE-C:Encryption key is provided by client. Data Key is passed in the header. Possible in API call only.
+      Client side encryption: Data is encrypted by client before sending to AWS
+16. Amazon exposes both HTTP & HTTPS end-points. HTTPS must be used for SSE-C
+      
 
 Amazon DynamoDB:
 1. Fully managed; supports both key/value and document data models.
