@@ -192,6 +192,15 @@ EMR - Elastic Map-Reduce
       Instance Store - this option provides high I/O
       EBS Volume - EBS volume can be attached to EMR cluster
       EMRFS - allows cluster to store data in s3. multiple cluster can point to same s3 bucket. EMRFS follows s3's consistency model. EMRFS consistency view helps to overcome problem associated with s3's eventual consistency. EMRFS offers to configure retry logic if inconsistency is detected. Metadata in DynamoDB keeps track of s3 objects.
+8. Choosing instance types for EMR -
+      MapReduce - General purpose - M3 or M4 (scale horizontally)
+      Machine Learning - P2, C3/C4
+      Spark - R3/R4 (high memory)
+      HBase - I2/D2 (high IOPS)
+9. Master Node - low compute. For cluster < 50 nodes,use m3.xlarge or m4.xlarge for master node. for cluster > 50 nodes use m3/m4.2xlarge instance type.
+10. AWS best partice - smaller custer with less number of nodes - this needs less maintenance.
+11.CloudWatch Metrics for EMR are updated every 5 minutes. These data are retained for 2 weeks.Ganglia is a opensource monitoring option for Hadoop. 
+12. EMR cluster can be resized either manually or using auto-scaling. AutoScaling Role should be added at the beginning of cluster creation.
 
 
 
