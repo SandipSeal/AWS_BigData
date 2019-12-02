@@ -201,6 +201,8 @@ EMR - Elastic Map-Reduce
 10. AWS best partice - smaller custer with less number of nodes - this needs less maintenance.
 11.CloudWatch Metrics for EMR are updated every 5 minutes. These data are retained for 2 weeks.Ganglia is a opensource monitoring option for Hadoop. 
 12. EMR cluster can be resized either manually or using auto-scaling. AutoScaling Role should be added at the beginning of cluster creation.
-
-
+13. Hive is a high level programming language. Hive needs an interpreter. Hive offers JDBC/ODBC connection. Trift Server allows programatic access to Hive. 
+14. Tez is a framework to enhance the performance to Hive. Tez is faster than MapReduce. Hive can connect to s3 and DynamoDB. Hive data can be joined with data in DynamoDB table using EMR DynamoDB connector.
+15. Presto is a in memory distributed fast SQL query engine. It is faster than Hive. It is sort of data virtualisation application; has connectors for various Hadoop applications.
+16. Presto is not a database, requires lot of memory...not good for batch job. It is good for interactive query.
 
