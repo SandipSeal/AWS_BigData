@@ -1,0 +1,129 @@
+Kinesis Streams:
+
+https://github.com/awslabs/amazon-kinesis-connectors
+https://aws.amazon.com/blogs/big-data/implementing-efficient-and-reliable-producers-with-the-amazon-kinesis-producer-library/
+
+
+Kinesis Firehose:
+https://aws.amazon.com/blogs/compute/amazon-kinesis-firehose-data-transformation-with-aws-lambda/
+
+IOT:
+https://d0.awsstatic.com/whitepapers/core-tenets-of-iot1.pdf
+
+
+
+DynamoDB:
+https://aws.amazon.com/blogs/big-data/scaling-writes-on-amazon-dynamodb-tables-with-global-secondary-indexes/
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SecondaryIndexes.html
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.CrossRegionRepl.html
+
+
+EMR:
+AWS EMR Best Practices - Whitepaper
+https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-web-interfaces.html
+https://docs.aws.amazon.com/emr/latest/ReleaseGuide/hue-ldap.html
+HBase Vs DynamoDB - Whitepaper
+https://aws.amazon.com/blogs/big-data/combine-nosql-and-massively-parallel-analytics-using-apache-hbase-and-apache-hive-on-amazon-emr/
+https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-hbase-access-hive.html
+
+Spark on EMR:
+https://aws.amazon.com/blogs/big-data/analyze-your-data-on-amazon-dynamodb-with-apache-spark/
+https://aws.amazon.com/blogs/big-data/analyze-realtime-data-from-amazon-kinesis-streams-using-zeppelin-and-spark-streaming/
+https://aws.amazon.com/blogs/big-data/optimize-spark-streaming-to-efficiently-process-amazon-kinesis-streams/
+https://aws.amazon.com/blogs/big-data/powering-amazon-redshift-analytics-with-apache-spark-and-amazon-machine-learning/
+https://aws.amazon.com/blogs/big-data/using-spark-sql-for-etl/
+https://github.com/awslabs/emr-dynamodb-connector
+
+
+Lambda:
+https://aws.amazon.com/blogs/big-data/a-zero-administration-amazon-redshift-database-loader/
+https://aws.amazon.com/blogs/compute/ad-hoc-big-data-processing-made-simple-with-serverless-mapreduce/
+https://aws.amazon.com/blogs/big-data/using-aws-lambda-for-event-driven-data-processing-pipelines/
+https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html
+https://aws.amazon.com/blogs/compute/amazon-kinesis-firehose-data-transformation-with-aws-lambda/ (Repeat)
+https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html
+https://aws.amazon.com/blogs/compute/implementing-a-serverless-aws-iot-backend-with-aws-lambda-and-amazon-dynamodb/
+https://aws.amazon.com/blogs/database/indexing-metadata-in-amazon-elasticsearch-service-using-aws-lambda-and-python/
+
+
+Redshift:
+https://d0.awsstatic.com/whitepapers/enterprise-data-warehousing-on-aws.pdf
+https://aws.amazon.com/blogs/big-data/amazon-redshift-engineerings-advanced-table-design-playbook-preamble-prerequisites-and-prioritization/  (V IMP)
+https://aws.amazon.com/blogs/big-data/optimizing-for-star-schemas-and-interleaved-sorting-on-amazon-redshift/
+https://docs.aws.amazon.com/redshift/latest/dg/c_loading-encrypted-files.html
+https://docs.aws.amazon.com/redshift/latest/dg/t_unloading_encrypted_files.html
+https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
+
+https://github.com/awslabs/amazon-redshift-utils/tree/master/src/AnalyzeVacuumUtility
+https://docs.aws.amazon.com/redshift/latest/dg/performing-a-deep-copy.html
+https://github.com/awslabs/amazon-redshift-utils/tree/master/src/SnapshotManager
+https://github.com/awslabs/amazon-redshift-monitoring
+
+https://docs.aws.amazon.com/redshift/latest/dg/c-query-performance.html
+
+https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html
+
+
+ML:
+https://aws.amazon.com/blogs/big-data/building-a-multi-class-ml-model-with-amazon-machine-learning/
+https://aws.amazon.com/blogs/big-data/building-a-binary-classification-model-with-amazon-machine-learning-and-amazon-redshift/
+https://aws.amazon.com/blogs/big-data/building-a-numeric-regression-model-with-amazon-machine-learning/
+
+
+ES:
+https://aws.amazon.com/blogs/security/how-to-visualize-and-refine-your-networks-security-by-adding-security-group-ids-to-your-vpc-flow-logs/#more-3559
+https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html
+
+R Studio:
+https://aws.amazon.com/blogs/big-data/connecting-r-with-amazon-redshift/
+https://aws.amazon.com/blogs/big-data/statistical-analysis-with-open-source-r-and-rstudio-on-amazon-emr/
+https://aws.amazon.com/blogs/big-data/crunching-statistics-at-scale-with-sparkr-on-amazon-emr/
+https://aws.amazon.com/blogs/big-data/running-r-on-aws/
+
+
+Visualization:
+https://aws.amazon.com/blogs/big-data/analyze-realtime-data-from-amazon-kinesis-streams-using-zeppelin-and-spark-streaming/
+https://aws.amazon.com/blogs/big-data/running-jupyter-notebook-and-jupyterhub-on-amazon-emr/
+
+
+
+Others:
+https://aws.amazon.com/blogs/big-data/secure-amazon-emr-with-encryption/
+https://aws.amazon.com/blogs/big-data/building-a-near-real-time-discovery-platform-with-aws/
+https://d1.awsstatic.com/whitepapers/lambda-architecure-on-for-batch-aws.pdf
+
+WhitePapers:
+https://d1.awsstatic.com/whitepapers/Big_Data_Analytics_Options_on_AWS.pdf (IMP)
+
+https://d1.awsstatic.com/whitepapers/whitepaper-streaming-data-solutions-on-aws-with-amazon-kinesis.pdf (IMP)
+
+https://d0.awsstatic.com/whitepapers/aws-amazon-emr-best-practices.pdf (IMP)
+
+https://d1.awsstatic.com/whitepapers/enterprise-data-warehousing-on-aws.pdf
+
+https://d1.awsstatic.com/whitepapers/lambda-architecure-on-for-batch-aws.pdf
+
+https://d1.awsstatic.com/whitepapers/RDS/AWS_Database_Migration_Service_Best_Practices.pdf
+
+https://d1.awsstatic.com/whitepapers/core-tenets-of-iot1.pdf
+
+https://d1.awsstatic.com/whitepapers/whitepaper-use-amazon-elasticsearch-to-log-and-monitor-almost-everything.pdf
+
+
+AWS Important links and Bigdata blogs:
+https://docs.aws.amazon.com/redshift/latest/dg/best-practices.html
+https://aws.amazon.com/blogs/big-data/amazon-redshift-engineerings-advanced-table-design-playbook-preamble-prerequisites-and-prioritization/
+https://aws.amazon.com/blogs/big-data/top-10-performance-tuning-techniques-for-amazon-redshift/
+https://aws.amazon.com/blogs/big-data/best-practices-for-securing-amazon-emr/
+https://docs.aws.amazon.com/athena/latest/ug/glue-best-practices.html
+https://aws.amazon.com/blogs/big-data/top-10-performance-tuning-tips-for-amazon-athena/
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html
+https://aws.amazon.com/blogs/aws/fine-grained-access-control-for-amazon-dynamodb/
+https://aws.amazon.com/blogs/database/choosing-the-right-dynamodb-partition-key/
+https://docs.aws.amazon.com/quicksight/latest/user/working-with-visual-types.html
+
+
+Youtube Reinvent videos:
+https://www.youtube.com/playlist?list=PLlkukGgpsXysCldA9cLzZRypAtWaCakq1
+https://www.youtube.com/watch?v=a3713oGB6Zk
+https://www.youtube.com/watch?v=yvBR71D0nAQ&t=8s
