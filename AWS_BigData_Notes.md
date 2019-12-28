@@ -206,3 +206,6 @@ EMR - Elastic Map-Reduce
 15. Presto is a in memory distributed fast SQL query engine. It is faster than Hive. It is sort of data virtualisation application; has connectors for various Hadoop applications.
 16. Presto is not a database, requires lot of memory...not good for batch job. It is good for interactive query.
 
+Amazon Machine Learning
+
+1. Data source can be - s3 bucket, AWS Redshift.
