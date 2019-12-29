@@ -43,7 +43,8 @@ Collection refers to batching multiple Kinesis Data Streams records and sending 
 This increases throughput compared to using no collection because it reduces the overhead of making many separate HTTP requests. In fact, PutRecords itself was specifically designed for this purpose.
 
 Collection differs from aggregation in that it is working with groups of Kinesis Data Streams records. The Kinesis Data Streams records being collected can still contain multiple records from the user. The relationship can be visualized as such:
-`
+
+```
 record 0 --|
 record 1   |        [ Aggregation ]
     ...    |--> Amazon Kinesis record 0 --|
@@ -65,4 +66,4 @@ record BB  |                              |
     ...    |--> Amazon Kinesis record M --|
     ...    |
 record ZZ--|
-`
+```
