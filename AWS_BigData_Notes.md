@@ -1,8 +1,8 @@
-AWS BigData:
+# AWS BigData:
 
-Kinesis:
+## Kinesis:
 
-Kinesis Data Streams:
+### Kinesis Data Streams:
 
 1. Data Stream consists of set of Shards. Shard has many data records. Kinesis billing is per shard. Records are sorted per shard.
 2. Data Records are composed of - Sequence Number, Partition Key and Data Blob. Data blob can be upto 1 MB size. All the records in a shard have same partition key. Sequence Number is unique to each record and is added by Kinesis after ingestion.
@@ -53,7 +53,7 @@ Note: Consumer Classic - 2 MB/Sec read capacity per shard across all consumers
  21. Kinesis Enhanced Fan-out is a game changing feature introduced in Aug-2018. Each enhanced fan-out consumer can read upto 2 MB/sec per shard. In this mode, kinesis pushes the data to consumers over HTTPS.
  22. Kinesis support shard splitting and shard merging. Kinesis auto-scaling is not a native feature. We can implement auto-scaling using AWS lambda.
  
- Kinesis Firehose:
+### Kinesis Firehose:
  
  1. Kinesis Firehose is a fully managed near real-time data streaming service. The minimum data latency for Kinesis Firehose is 60 sec. 
  2. KFS supports data ingestion into - s3, RedShift, ElasticSearch and Splunk. Lambda function can be invoked to transform the data out from KFS before sending the same to the target.
@@ -61,7 +61,7 @@ Note: Consumer Classic - 2 MB/Sec read capacity per shard across all consumers
  4. Firehose buffers the data before sending it to the target. The buffer is flushed based on the buffer size and timing rule. For Lambda, the maximum buffer size can be 3 MB.
  
  
- Simple Queue Service (SQS):
+## Simple Queue Service (SQS):
  
  1. It is a fully managed queue service on AWS. SQS can scale from 1 message to 10000 messages/sec.
  2. Default retention of SQS is 4 days and maximum reyention is 14 days. Max size of each message is 256 KB
@@ -74,8 +74,7 @@ Note: Consumer Classic - 2 MB/Sec read capacity per shard across all consumers
  2. Database Migration Service (DMS)
  3. Snowball + SnowMobil + Snowball Edge (storage + compute)
 
-
-Amazon S3:
+## Amazon S3:
 
 1. Buckets must have globally unique name
 2. Max size of a file in S3 is 5 TB. If size is more than 100 MB then multi-part upload should be used. It is must for file size > 5 GB
@@ -111,7 +110,8 @@ Amazon S3:
 16. Amazon exposes both HTTP & HTTPS end-points. HTTPS must be used for SSE-C
       
 
-Amazon DynamoDB:
+## Amazon DynamoDB:
+
 1. Fully managed; supports both key/value and document data models.
 2. DynamoDB is highly scalable, highly available. It uses SSD for storage
 3. Each table in DynamoDB must have a primary key; primary key must be selected at the time of table creation. Each row in DynamoDB table is called an item. The maximum size of an item can be 400 KB. 
@@ -134,7 +134,7 @@ RCU: 1 RCU = 1 Strong consistent read or 2 eventual consistent read per second f
 13. The deleted items due to TTL also deletes the items in index tables (in case of GSI).
 14. All the changes (Insert/Update/Delete) made to a DynamoDB table are sent to a stream. DynamoDB stream can be read by AWS Lambda. Stream persists the data for max 24 hours. DynamoDB stream can also feed Kinesis using KCL.
 
-Amazon Redshift:
+## Amazon Redshift:
 
 1. Fully managed data warehouse in AWS cloud. This is a petabyte scale, column oriented datastore.
 2. Redshift Architecture : Leader Node & Compute Nodes. The EC2 compute nodes are in single AZ. Client tools connect to the Leader Node.The default port is 5439.
@@ -176,7 +176,7 @@ manifest is defined in JSON format.
 32. Redshift snapshots can be automated or manual. Automatic snapshot is taken every 8 hours or every 5 GB of data change. Redshift also allows cross-region snapshot/backup. 
 33. If the Redshift cluster is encryted then snapshot will also be encrypted. When Redshift is restored from a snapshot a new cluster is created using same configuration.
       
-Elastic MapReduce:
+## Elastic MapReduce:
 
 1. This is a managed hadoop cluster on AWS. HUE - Hadoop User Experience. 
 2. Hadoop Architecture:
