@@ -176,7 +176,7 @@ manifest is defined in JSON format.
 32. Redshift snapshots can be automated or manual. Automatic snapshot is taken every 8 hours or every 5 GB of data change. Redshift also allows cross-region snapshot/backup. 
 33. If the Redshift cluster is encryted then snapshot will also be encrypted. When Redshift is restored from a snapshot a new cluster is created using same configuration.
       
-EMR - Elastic Map-Reduce
+Elastic MapReduce:
 
 1. This is a managed hadoop cluster on AWS. HUE - Hadoop User Experience. 
 2. Hadoop Architecture:
