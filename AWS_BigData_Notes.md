@@ -134,6 +134,36 @@ RCU: 1 RCU = 1 Strong consistent read or 2 eventual consistent read per second f
 13. The deleted items due to TTL also deletes the items in index tables (in case of GSI).
 14. All the changes (Insert/Update/Delete) made to a DynamoDB table are sent to a stream. DynamoDB stream can be read by AWS Lambda. Stream persists the data for max 24 hours. DynamoDB stream can also feed Kinesis using KCL.
 
+## Elastic MapReduce:
+
+1. This is a managed hadoop cluster on AWS. HUE - Hadoop User Experience. 
+2. Hadoop Architecture:
+      a. Hadoop Common - contains libraries and utilities
+      b. HDFS - distributed file system; fault-tlerent
+      c. YARN - Resource manager
+      d. MapReduce - Processing framework for Hadoop
+3. EMR Node types - MasterInstanceGroup (only 1 Master Node), CoreInstanceGroup (one or more Core Nodes) and TaskInstanceGroup (upto 48 task nodes). EMR cluster can have only one master node (single point of failure). 
+4. Core node - slave node in Hadoop architecture. It store data as part of HDFS or EMRFS (extends hadoop to access data from s3). Core node runs NodeManager daemon. 
+5. Tasks Nodes - This is also a slave node. Task nodes are optional. No data node daemon. Task nodes can be added or removed; these nodes provides extra capacity.
+6. EMR is a single AZ concept. Blocks are replicated across node; due to latency in transfering block across Availability Zones, blocks are stored in single avaiability zone. A typical DFS won't work well with Hadoop. In HDFS, each block of data is replicated 3 types. The block size in HDFS is 64 MB (default). Large blocksize will maximise the triughput for large file. Larger block size will reduce the random block seeks. 
+7. Replication factor can be changed at file level. HDFS options - 
+      - Instance Store - this option provides high I/O
+      - EBS Volume - EBS volume can be attached to EMR cluster
+      - EMRFS - allows cluster to store data in s3. multiple cluster can point to same s3 bucket. EMRFS follows s3's consistency model. EMRFS consistency view helps to overcome problem associated with s3's eventual consistency. EMRFS offers to configure retry logic if inconsistency is detected. Metadata in DynamoDB keeps track of s3 objects.
+8. Choosing instance types for EMR -
+      - MapReduce - General purpose - M3 or M4 (scale horizontally)
+      - Machine Learning - P2, C3/C4
+      - Spark - R3/R4 (high memory)
+      - HBase - I2/D2 (high IOPS)
+9. Master Node - low compute. For cluster < 50 nodes,use m3.xlarge or m4.xlarge for master node. for cluster > 50 nodes use m3/m4.2xlarge instance type.
+10. AWS best partice - smaller custer with less number of nodes - this needs less maintenance.
+11. CloudWatch Metrics for EMR are updated every 5 minutes. These data are retained for 2 weeks.Ganglia is a opensource monitoring option for Hadoop. 
+12. EMR cluster can be resized either manually or using auto-scaling. AutoScaling Role should be added at the beginning of cluster creation.
+13. Hive is a high level programming language. Hive needs an interpreter. Hive offers JDBC/ODBC connection. Trift Server allows programatic access to Hive. 
+14. Tez is a framework to enhance the performance to Hive. Tez is faster than MapReduce. Hive can connect to s3 and DynamoDB. Hive data can be joined with data in DynamoDB table using EMR DynamoDB connector.
+15. Presto is a in memory distributed fast SQL query engine. It is faster than Hive. It is sort of data virtualisation application; has connectors for various Hadoop applications.
+16. Presto is not a database, requires lot of memory...not good for batch job. It is good for interactive query.
+
 ## Amazon Redshift:
 
 1. Fully managed data warehouse in AWS cloud. This is a petabyte scale, column oriented datastore.
@@ -176,33 +206,3 @@ manifest is defined in JSON format.
 32. Redshift snapshots can be automated or manual. Automatic snapshot is taken every 8 hours or every 5 GB of data change. Redshift also allows cross-region snapshot/backup. 
 33. If the Redshift cluster is encryted then snapshot will also be encrypted. When Redshift is restored from a snapshot a new cluster is created using same configuration
 34. AWS RedShift Cluster Key Concepts - https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes
-
-## Elastic MapReduce:
-
-1. This is a managed hadoop cluster on AWS. HUE - Hadoop User Experience. 
-2. Hadoop Architecture:
-      a. Hadoop Common - contains libraries and utilities
-      b. HDFS - distributed file system; fault-tlerent
-      c. YARN - Resource manager
-      d. MapReduce - Processing framework for Hadoop
-3. EMR Node types - MasterInstanceGroup (only 1 Master Node), CoreInstanceGroup (one or more Core Nodes) and TaskInstanceGroup (upto 48 task nodes). EMR cluster can have only one master node (single point of failure). 
-4. Core node - slave node in Hadoop architecture. It store data as part of HDFS or EMRFS (extends hadoop to access data from s3). Core node runs NodeManager daemon. 
-5. Tasks Nodes - This is also a slave node. Task nodes are optional. No data node daemon. Task nodes can be added or removed; these nodes provides extra capacity.
-6. EMR is a single AZ concept. Blocks are replicated across node; due to latency in transfering block across Availability Zones, blocks are stored in single avaiability zone. A typical DFS won't work well with Hadoop. In HDFS, each block of data is replicated 3 types. The block size in HDFS is 64 MB (default). Large blocksize will maximise the triughput for large file. Larger block size will reduce the random block seeks. 
-7. Replication factor can be changed at file level. HDFS options - 
-      - Instance Store - this option provides high I/O
-      - EBS Volume - EBS volume can be attached to EMR cluster
-      - EMRFS - allows cluster to store data in s3. multiple cluster can point to same s3 bucket. EMRFS follows s3's consistency model. EMRFS consistency view helps to overcome problem associated with s3's eventual consistency. EMRFS offers to configure retry logic if inconsistency is detected. Metadata in DynamoDB keeps track of s3 objects.
-8. Choosing instance types for EMR -
-      - MapReduce - General purpose - M3 or M4 (scale horizontally)
-      - Machine Learning - P2, C3/C4
-      - Spark - R3/R4 (high memory)
-      - HBase - I2/D2 (high IOPS)
-9. Master Node - low compute. For cluster < 50 nodes,use m3.xlarge or m4.xlarge for master node. for cluster > 50 nodes use m3/m4.2xlarge instance type.
-10. AWS best partice - smaller custer with less number of nodes - this needs less maintenance.
-11. CloudWatch Metrics for EMR are updated every 5 minutes. These data are retained for 2 weeks.Ganglia is a opensource monitoring option for Hadoop. 
-12. EMR cluster can be resized either manually or using auto-scaling. AutoScaling Role should be added at the beginning of cluster creation.
-13. Hive is a high level programming language. Hive needs an interpreter. Hive offers JDBC/ODBC connection. Trift Server allows programatic access to Hive. 
-14. Tez is a framework to enhance the performance to Hive. Tez is faster than MapReduce. Hive can connect to s3 and DynamoDB. Hive data can be joined with data in DynamoDB table using EMR DynamoDB connector.
-15. Presto is a in memory distributed fast SQL query engine. It is faster than Hive. It is sort of data virtualisation application; has connectors for various Hadoop applications.
-16. Presto is not a database, requires lot of memory...not good for batch job. It is good for interactive query.
