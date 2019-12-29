@@ -67,3 +67,25 @@ record BB  |                              |
     ...    |
 record ZZ--|
 ```
+
+
+#### Node Type Details<a name="rs-node-type-info"></a>
+
+ The following tables summarize the node specifications for each node type and size\. The headings in the tables have these meanings: 
++ *vCPU* is the number of virtual CPUs for each node\.
++ *RAM* is the amount of memory in gibibytes \(GiB\) for each node\.
++ *Slices per Node* is the number of slices into which a compute node is partitioned\.
+
+  The number of slices per node might change if the cluster is resized using elastic resize\.
++ *Storage* is the capacity and type of storage for each node\.
++  *Node Range* is the minimum and maximum number of nodes that Amazon Redshift supports for the node type and size\. 
+**Note**  
+You might be restricted to fewer nodes depending on the quota that is applied to your AWS account in the selected AWS Region\. 
++ *Total Capacity* is the total storage capacity for the cluster if you deploy the maximum number of nodes that is specified in the node range\.
+
+For 16 TB or larger amounts of data, we recommend that you consider RA3 nodes as the default choice\. For workloads that need the fastest performance, consider using DC2 nodes\.
+
+
+# Redshift
+
+https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes
