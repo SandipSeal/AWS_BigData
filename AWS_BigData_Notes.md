@@ -61,6 +61,20 @@ Note: Consumer Classic - 2 MB/Sec read capacity per shard across all consumers
  4. Firehose buffers the data before sending it to the target. The buffer is flushed based on the buffer size and timing rule. For Lambda, the maximum buffer size can be 3 MB.
  
  
+### Kinesis Data Analytics
+
+1. In-Application streams are created for intermediate storage of data from streaming sources and this facilitae running SQL query on streaming data.
+
+2. Data in ingested into In-Application streams in 2 steps:
+- Create In-Application stream
+- Insert data into In-Application stream using data pump
+Multiple writes can write into an in-application stream and multiple readers can read from a stream
+
+3. After an in-application stream is created, you can perform normal SQL queries. When you query streams, most SQL statements are bound using a row-based or time-based window. For more information, see Windowed Queries.
+
+You can also join streams. For examples of joining streams, see Streaming Data Operations: Stream Joins.
+ 
+ 
 ## Simple Queue Service (SQS):
  
  1. It is a fully managed queue service on AWS. SQS can scale from 1 message to 10000 messages/sec.
