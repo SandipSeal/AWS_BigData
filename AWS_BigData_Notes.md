@@ -57,7 +57,7 @@ Note: Consumer Classic - 2 MB/Sec read capacity per shard across all consumers
  
  1. Kinesis Firehose is a fully managed near real-time data streaming service. The minimum data latency for Kinesis Firehose is 60 sec. 
  2. KFS supports data ingestion into - s3, RedShift, ElasticSearch and Splunk. Lambda function can be invoked to transform the data out from KFS before sending the same to the target.
- 3. Firehose supports compression of data when the target is s3 (GZIP, ZIP, SNAPPY)
+ 3. Firehose supports compression of data when the target is s3 (GZIP, ZIP, SNAPPY). Snappy or Zip compression is not available for delivery streams with Amazon Redshift as the destination. Compression is not enabled by default.
  4. Firehose buffers the data before sending it to the target. The buffer is flushed based on the buffer size and timing rule. For Lambda, the maximum buffer size can be 3 MB.
  
  
