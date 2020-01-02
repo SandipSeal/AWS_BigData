@@ -68,6 +68,7 @@ Note: Consumer Classic - 2 MB/Sec read capacity per shard across all consumers
 2. Data in ingested into In-Application streams in 2 steps:
 - Create In-Application stream
 - Insert data into In-Application stream using data pump
+
 Multiple writes can write into an in-application stream and multiple readers can read from a stream
 
 3. After an in-application stream is created, you can perform normal SQL queries. When you query streams, most SQL statements are bound using a row-based or time-based window. For more information, see Windowed Queries.
