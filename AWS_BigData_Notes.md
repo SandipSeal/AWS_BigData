@@ -207,3 +207,12 @@ manifest is defined in JSON format.
 33. If the Redshift cluster is encryted then snapshot will also be encrypted. When Redshift is restored from a snapshot a new cluster is created using same configuration
 34. AWS RedShift Cluster Key Concepts - https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes
 35. Amazon Redshift Best Practices for Designing Queries - https://docs.aws.amazon.com/redshift/latest/dg/c_designing-queries-best-practices.html
+
+## AWS Machine Learning
+
+1. Various services on AWS:
+- AWS Comprehend - NLP service
+- AWS Rekognition - Image/Video Analysis
+- AWS Polly - Text to Speech conversion
+- AWS SageMaker - Fully Managed ML service on AWS
+- Amazon Transcribe - Identifies speech is audio file and transcribe them in text
