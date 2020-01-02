@@ -206,3 +206,4 @@ manifest is defined in JSON format.
 32. Redshift snapshots can be automated or manual. Automatic snapshot is taken every 8 hours or every 5 GB of data change. Redshift also allows cross-region snapshot/backup. 
 33. If the Redshift cluster is encryted then snapshot will also be encrypted. When Redshift is restored from a snapshot a new cluster is created using same configuration
 34. AWS RedShift Cluster Key Concepts - https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes
+35. Amazon Redshift Best Practices for Designing Queries - https://docs.aws.amazon.com/redshift/latest/dg/c_designing-queries-best-practices.html
