@@ -164,6 +164,16 @@ RCU: 1 RCU = 1 Strong consistent read or 2 eventual consistent read per second f
 15. Presto is a in memory distributed fast SQL query engine. It is faster than Hive. It is sort of data virtualisation application; has connectors for various Hadoop applications.
 16. Presto is not a database, requires lot of memory...not good for batch job. It is good for interactive query.
 
+## AWS Machine Learning
+
+1. Various services on AWS:
+- AWS Comprehend - NLP service
+- AWS Rekognition - Image/Video Analysis
+- AWS Polly - Text to Speech conversion
+- AWS SageMaker - Fully Managed ML service on AWS
+- Amazon Transcribe - Identifies speech is audio file and transcribe them in text
+
+
 ## Amazon Redshift:
 
 1. Fully managed data warehouse in AWS cloud. This is a petabyte scale, column oriented datastore.
@@ -207,12 +217,3 @@ manifest is defined in JSON format.
 33. If the Redshift cluster is encryted then snapshot will also be encrypted. When Redshift is restored from a snapshot a new cluster is created using same configuration
 34. AWS RedShift Cluster Key Concepts - https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes
 35. Amazon Redshift Best Practices for Designing Queries - https://docs.aws.amazon.com/redshift/latest/dg/c_designing-queries-best-practices.html
-
-## AWS Machine Learning
-
-1. Various services on AWS:
-- AWS Comprehend - NLP service
-- AWS Rekognition - Image/Video Analysis
-- AWS Polly - Text to Speech conversion
-- AWS SageMaker - Fully Managed ML service on AWS
-- Amazon Transcribe - Identifies speech is audio file and transcribe them in text
