@@ -74,6 +74,14 @@ Multiple writes can write into an in-application stream and multiple readers can
 3. After an in-application stream is created, you can perform normal SQL queries. When you query streams, most SQL statements are bound using a row-based or time-based window. For more information, see Windowed Queries.
 
 You can also join streams. For examples of joining streams, see Streaming Data Operations: Stream Joins.
+
+4. You can specify a query to process records in a tumbling window, sliding window, or stagger window manner, depending on your application needs. Kinesis Data Analytics supports the following window types:
+
+- Stagger Windows: A query that aggregates data using keyed time-based windows that open as data arrives. The keys allow for multiple overlapping windows. This is the recommended way to aggregate data using time-based windows, because Stagger Windows reduce late or out-of-order data compared to Tumbling windows.
+
+- Tumbling Windows: A query that aggregates data using distinct time-based windows that open and close at regular intervals.
+
+- Sliding Windows: A query that aggregates data continuously, using a fixed time or rowcount interval.
  
  
 ## Simple Queue Service (SQS):
