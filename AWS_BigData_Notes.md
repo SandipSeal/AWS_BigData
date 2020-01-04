@@ -135,7 +135,7 @@ You can also join streams. For examples of joining streams, see Streaming Data O
       
 ## AWS IoT
 
-1. 
+AWS IoT Architecture:
 
 ![AWS_IoT](https://github.com/SandipSeal/AWS_BigData/blob/master/aws_iot_data_services.png)
 
