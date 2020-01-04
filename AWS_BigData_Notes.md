@@ -139,6 +139,8 @@ AWS IoT Architecture:
 
 ![AWS_IoT](https://github.com/SandipSeal/AWS_BigData/blob/master/aws_iot_data_services.png)
 
+- https://docs.aws.amazon.com/iot/latest/developerguide/what-is-aws-iot.html
+
 ### IoT Device Gateway:
 
 - Entry point for IoT devices to connect to AWS infrastructure.
