@@ -139,6 +139,47 @@ AWS IoT Architecture:
 
 ![AWS_IoT](https://github.com/SandipSeal/AWS_BigData/blob/master/aws_iot_data_services.png)
 
+### IoT Device Gateway:
+
+- Entry point for IoT devices to connect to AWS infrastructure.
+- It is fully manages and scales automatically to support even a billion devices
+- It supports MQTT, WebSockets and HTTP 1.1 protocol
+
+### IoT Message Broker:
+
+- It is a pub-sub service within AWS IoT - low latency
+- Publishes the messages to a topic - like SNS service
+- Mesages are forwarded to all the services connected to the Message Broker
+
+### IoT Thing Registry:
+
+- This is IAM of IoT
+- Organises resources associated with each device in the IoT cloud
+- Maintaintains metadata corresponding to each device. Each connected device gets unique Id.
+- Can create X.509 certificate to help device to connect to AWS
+- Allows to create device group
+
+### Device Shadow:
+
+- It is a JSON document representing the state of a connected device(Thing)
+- We can set the state to different desired states
+
+### Rules Engine:
+
+- Rules are defined on Message Broker (MQTT) topics.
+- Rules = When it's triggered or what action it does.
+- Rules engine has large number of use cases and it can direct the message to many AWS services.
+- Rules need IAM roles to perform their tasks
+
+## IOT Greengrass:
+
+- This brings compute layer to the device.
+- Allows to execute AWS Lambda
+- Can operate offline
+
+
+
+
 ## Amazon DynamoDB:
 
 1. Fully managed; supports both key/value and document data models.
