@@ -52,6 +52,7 @@ Note: Consumer Classic - 2 MB/Sec read capacity per shard across all consumers
  AWS Lambda and Kinesis Firhose remove the need to using Kinesis Connector Libraries
  21. Kinesis Enhanced Fan-out is a game changing feature introduced in Aug-2018. Each enhanced fan-out consumer can read upto 2 MB/sec per shard. In this mode, kinesis pushes the data to consumers over HTTPS.
  22. Kinesis support shard splitting and shard merging. Kinesis auto-scaling is not a native feature. We can implement auto-scaling using AWS lambda.
+ 23. Enhanced Fan-out consumers can be built by using either KCL or Kinesis API. KCL 2.0 onward automatically connects to all the shards in a kinesis data stream.API connects to individual shard.
  
 ### Kinesis Firehose:
  
@@ -132,6 +133,11 @@ You can also join streams. For examples of joining streams, see Streaming Data O
       Client side encryption: Data is encrypted by client before sending to AWS
 16. Amazon exposes both HTTP & HTTPS end-points. HTTPS must be used for SSE-C
       
+## AWS IoT
+
+1. 
+
+![AWS_IoT](aws_iot_data_services.png)
 
 ## Amazon DynamoDB:
 
@@ -195,6 +201,11 @@ RCU: 1 RCU = 1 Strong consistent read or 2 eventual consistent read per second f
 - AWS Polly - Text to Speech conversion
 - AWS SageMaker - Fully Managed ML service on AWS
 - Amazon Transcribe - Identifies speech is audio file and transcribe them in text
+
+## AWS CloudSearch
+
+1. Amazon CloudSearch is a fully managed service in the cloud that makes it easy to set up, manage, and scale a search solution for your website or application.
+2. With Amazon CloudSearch you can search large collections of data such as web pages, document files, forum posts, or product information. You can quickly add search capabilities without having to become a search expert or worry about hardware provisioning, setup, and maintenance. As your volume of data and traffic fluctuates, Amazon CloudSearch scales to meet your needs.
 
 
 ## Amazon Redshift:
