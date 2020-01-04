@@ -137,7 +137,7 @@ You can also join streams. For examples of joining streams, see Streaming Data O
 
 1. 
 
-![AWS_IoT](/AWS_BigData/aws_iot_data_services.png)
+![AWS_IoT](https://github.com/SandipSeal/AWS_BigData/blob/master/aws_iot_data_services.png)
 
 ## Amazon DynamoDB:
 
