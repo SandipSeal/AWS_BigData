@@ -55,6 +55,8 @@ Note: Consumer Classic - 2 MB/Sec read capacity per shard across all consumers
  23. Enhanced Fan-out consumers can be built by using either KCL or Kinesis API. KCL 2.0 onward automatically connects to all the shards in a kinesis data stream.API connects to individual shard.
  
 ### Kinesis Firehose:
+
+- https://docs.aws.amazon.com/firehose/latest/dev/what-is-this-service.html#data-flow-diagrams
  
  1. Kinesis Firehose is a fully managed near real-time data streaming service. The minimum data latency for Kinesis Firehose is 60 sec. 
  2. KFS supports data ingestion into - s3, RedShift, ElasticSearch and Splunk. Lambda function can be invoked to transform the data out from KFS before sending the same to the target.
