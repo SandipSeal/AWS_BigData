@@ -296,6 +296,12 @@ The desired properties of a file format-
 - Parquet files are conditionally splittable
 - Limited schema evaluation capability. New fields can be added at the end but existing fields cannot be deleted
 
+### Compression Formats
+
+Compression formats comparison -
+
+[Compression Formats](https://github.com/SandipSeal/AWS_BigData/blob/master/throughput2.png)
+
 ## AWS Machine Learning
 
 1. Various services on AWS:
