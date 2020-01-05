@@ -244,6 +244,58 @@ RCU: 1 RCU = 1 Strong consistent read or 2 eventual consistent read per second f
 15. Presto is a in memory distributed fast SQL query engine. It is faster than Hive. It is sort of data virtualisation application; has connectors for various Hadoop applications.
 16. Presto is not a database, requires lot of memory...not good for batch job. It is good for interactive query.
 
+### EMR File Formats:
+
+The desired properties of a file format-
+
+- Read Fast
+- Write Fast
+- Splittable
+- Should support various compression
+- Should support Schema Evaluation (allow changing schema of the file)
+
+#### Text File (CSV,TSV)
+- Good Write performance but slow read performance
+- Do not support block complression
+- Text files are splittable (based on \n character)
+- Limited schema evaluation capability. New fields can be added at the end but existing fields cannot be deleted
+
+
+#### Sequence File
+- Behaviour - Records are stored as key value pair. The value in a record in stored in binary format.
+- Good read & write performance
+- Supports block level compression
+- Splittable
+- Limited schema evaluation capability. New fields can be added at the end but existing fields cannot be deleted
+
+#### Avro File
+- Behaviour - This is a file format plus serialisation/de-serialisation framework. AVRO uses JSON format for defining data types and serialising data.
+- Average read & write performance
+- Supports block level compression
+- Splittable
+- Ideal for schema evaluation and the meta-data of the for the data structure is also stored along with the data
+
+#### RC File (Row Columnar)
+- Behavior - A columnar file format that store data in key value pair format. It has much similarity to the Sequence File format.
+- Provides faster read but slower write performance
+- Provides very good compression ratio; supports block level compression.
+- RC files are splittable
+- Does not support schema evaluation
+
+#### ORC File (Optimised Row Columnar)
+- Behavior - A columnar file format that store data in key value pair format. It has much similarity to the Sequence File format.
+- Provides faster read but slower write performance (better than RC)
+- Provides very good compression ratio; supports block level compression (better than RC)
+- ORC files are splittable at stripe level
+- Does not support schema evaluation
+
+#### Parquet File
+- Behavior - A columnar file format similar to RC & ORC. Parquet stores nested data structures in flat columnar format.
+- Provides faster read but slower write performance
+- Supports compression (mostly with snappy codec)
+- Parquet files are conditionally splittable
+- Limited schema evaluation capability. New fields can be added at the end but existing fields cannot be deleted
+
 ## AWS Machine Learning
 
 1. Various services on AWS:
@@ -302,3 +354,7 @@ manifest is defined in JSON format.
 33. If the Redshift cluster is encryted then snapshot will also be encrypted. When Redshift is restored from a snapshot a new cluster is created using same configuration
 34. AWS RedShift Cluster Key Concepts - https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes
 35. Amazon Redshift Best Practices for Designing Queries - https://docs.aws.amazon.com/redshift/latest/dg/c_designing-queries-best-practices.html
+36. RDS PostgreSQL can query data from RedShift using extensions. There are 2 extensions -
+      - PostgreSQL fdw (Foreign Data Wrapper) - This extension is very slow for large number of rows.
+      - Dblink - This extension pushes all the query complexity to RedShift
+      https://aws.amazon.com/blogs/big-data/join-amazon-redshift-and-amazon-rds-postgresql-with-dblink/
