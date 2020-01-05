@@ -302,6 +302,11 @@ Compression formats comparison -
 
 ![Compression Formats](https://github.com/SandipSeal/AWS_BigData/blob/master/throughput2.png)
 
+Key Highlights
+- Gzip is a good choice as compression codec for cold data. Gzip compressed files are not splittable
+- Snappy and Gzip are most commonly used compression techniques. Snappy is preferred over Gzip.
+
+
 ## AWS Machine Learning
 
 1. Various services on AWS:
