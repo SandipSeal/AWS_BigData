@@ -300,7 +300,7 @@ The desired properties of a file format-
 
 Compression formats comparison -
 
-[Compression Formats](https://github.com/SandipSeal/AWS_BigData/blob/master/throughput2.png)
+![Compression Formats](https://github.com/SandipSeal/AWS_BigData/blob/master/throughput2.png)
 
 ## AWS Machine Learning
 
