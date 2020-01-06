@@ -358,16 +358,17 @@ Key Highlights
 ### Security - Kinesis
 
 #### Kinesis Data Streams
-• SSL endpoints using the HTTPS protocol to do encryption in flight
-• AWS KMS provides server-side encryption [Encryption at rest]
-• For client side-encryption, you must use your own encryption libraries • Supported Interface VPC Endpoints / Private Link – access privately
-• KCL – must get read / write access to DynamoDB table
+- SSL endpoints using the HTTPS protocol to do encryption in flight
+- AWS KMS provides server-side encryption
+- For client side-encryption, you must use your own encryption libraries
+- Supported Interface VPC Endpoints / Private Link – access privately
+- KCL – must get read / write access to DynamoDB table
 #### Kinesis Data Firehose:
-• Attach IAM roles so it can deliver to S3 / ES / Redshift / Splunk
-• Can encrypt the delivery stream with KMS [Server side encryption] • Supported Interface VPC Endpoints / Private Link – access privately
+- Attach IAM roles so it can deliver to S3 / ES / Redshift / Splunk
+- Can encrypt the delivery stream with KMS
+- Supported Interface VPC Endpoints / Private Link – access privately
 #### Kinesis Data Analytics
-• Attach IAM role so it can read from Kinesis Data Streams and reference sources
-and write to an output destination (example Kinesis Data Firehose)
+- Attach IAM role so it can read from Kinesis Data Streams and reference sources and write to an output destination (example Kinesis Data Firehose)
 
 ## Amazon Redshift:
 
