@@ -321,6 +321,22 @@ Key Highlights
 1. Amazon CloudSearch is a fully managed service in the cloud that makes it easy to set up, manage, and scale a search solution for your website or application.
 2. With Amazon CloudSearch you can search large collections of data such as web pages, document files, forum posts, or product information. You can quickly add search capabilities without having to become a search expert or worry about hardware provisioning, setup, and maintenance. As your volume of data and traffic fluctuates, Amazon CloudSearch scales to meet your needs.
 
+## AWS Security
+
+### Encryption
+
+1. Encryption in Flight: Achieved through SSL (HTTPS). SSL certificate encrypts the data in flight.
+2. Serverside Encryption at Rest: Data is encrypted after being received at the server side. Data is decrypted before being sent.
+3. Client Side Encryption: Data will be encrypted by the client and would never be decrypted in the server. Data will be decrypted by a receiving client.This can leverage 'Envelope Encryption'.
+
+### S3 Encryption
+
+- SSE s3: Encryption keys are handled and managed by AWS transparently. User must set the header "X-amz-server-side-encryption:AES256"
+- SSE KMS: Encryption keys are handled and managed by KMS. This option provides user control + audit trail. User must set the header "X-amz-server-side-encryption:aws:kms"
+- SSE-C:Encryption keys are fully handled and managed by customer outside AWS. s3 does the store the encryption key. User must use HTTPS for SSE-C. Encryption key (data key) must be provided in the HTTP request.
+- Client Side Encryption: Client library such as Amazon S3 Encryption Client can be used for this. Data is encrypted before sending to s3. The encryption key is fully managed by user.
+- S3 supports both HTTP & HTTPS end-points
+
 
 ## Amazon Redshift:
 
