@@ -337,6 +337,22 @@ Key Highlights
 - Client Side Encryption: Client library such as Amazon S3 Encryption Client can be used for this. Data is encrypted before sending to s3. The encryption key is fully managed by user.
 - S3 supports both HTTP & HTTPS end-points
 
+### AWS KMS
+
+- KMS should be used for sensitive information
+- The CMK used in KMS for encrypting the data key can never be retrieved by the user. The CMK can be rotated for extra security
+- Never ever store secrets (password, ID# etc.) in the plain text format.
+- If the data size > 4KB then Envelope Encryption should be used.
+- Users should have necessary IAM permission to call KMS service to encrypt/decrypt
+
+### Cloud HSM
+
+- AWS provides dedicated encryption hardware
+- Encryption key is fully owned and managed by user
+- CloudHSM hardware is tamper resistant. This is FIPS 140-3 Level 3 compliant.
+- CloudHSM cluster is spread across multiple AZs
+- Supports both symmetric and asymmetric encryption
+
 
 ## Amazon Redshift:
 
