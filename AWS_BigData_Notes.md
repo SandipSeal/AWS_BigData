@@ -353,6 +353,7 @@ Key Highlights
 - CloudHSM cluster is spread across multiple AZs
 - Supports both symmetric and asymmetric encryption
 
+![HSM Vs KMS](https://github.com/SandipSeal/AWS_BigData/blob/master/AWS-KMS_HSM.png)
 
 ## Amazon Redshift:
 
