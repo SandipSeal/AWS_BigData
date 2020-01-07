@@ -372,6 +372,30 @@ Key Highlights
 #### Kinesis Data Analytics
 - Attach IAM role so it can read from Kinesis Data Streams and reference sources and write to an output destination (example Kinesis Data Firehose)
 
+## AWS Data Visualization
+
+### Amazon QuickSight
+
+1. Cloud based vizualization tool for the business analysts. QuckSight is serverless.
+2. QuckSight can connect to several data sources - supports JDBC/ODBC, can connect to xls, CSV, TSV, AWS Athena data as well
+3. QuckSight data preparation allows limited ETL capability
+4. QuckSight imports the data from the sources into the SPICE engine. SPICE stands for -
+- SuperFast, Parallel, In-Memory Processing Engine.
+5. SPICE uses columnar data storage. SPICE accelerates query on large datasets.
+6. Each user get 10GB space in SPICE
+7. QuickSight can scale out to hundreds of thousands of users
+8. QuickSight Anti-Patterns:
+- Highly formatted canned reports/dashboards
+- Performing complex ETL transformations
+9. QuickSight Security:
+- Allows Multi-Factor Authentication
+- Allows VPC connectivity - add QuickSight IP address range to DB security groups
+- Row Level Security
+- Private VPC access
+10. QuickSight User Management:
+- Standard Edition: via IAM or E-Mail sign-up
+- Enterprise Edition allows Active Directory (AD) integration
+
 ## Amazon Redshift:
 
 1. Fully managed data warehouse in AWS cloud. This is a petabyte scale, column oriented datastore.
