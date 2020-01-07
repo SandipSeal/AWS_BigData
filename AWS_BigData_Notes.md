@@ -394,7 +394,12 @@ Key Highlights
 - Private VPC access
 10. QuickSight User Management:
 - Standard Edition: via IAM or E-Mail sign-up
-- Enterprise Edition allows Active Directory (AD) integration
+- Enterprise Edition allows Active Directory (AD) integration. This version allows encryption at rest
+11. QuickSight Machine Learning Insights
+- ML-powered anomaly detection: Uses Random Cut Forest algorithm to find out the top contributors to change in metrics
+- ML-powered forecasting: Uses Random Cut Forest algorithms to detect seasonality and trends
+- Autonaratives: Adds story to data in dashboards
+- Suggested Insights: Provides recomendation to use appropriate insight tool(s).
 
 ## Amazon Redshift:
 
