@@ -383,6 +383,34 @@ Key Highlights
 - DynamoDB Streams do not support encryption 
 - VPC Endpoint is provided through a Gateway
 
+### Security - RDS
+- VPC provides network isolation
+- Security Groups control network access to DB Instances
+- KMS provides encryption at rest
+- SSL provides encryption in-flight
+- IAM policies provide protection for the RDS API
+- IAM authentication is supported by PostgreSQL and MySQL
+- Must manage user permissions within the database itself
+- MSSQL Server and Oracle support TDE (Transparent Data Encryption)
+
+### Security - Lambda
+- IAM roles attached to each Lambda function • Sources
+- Targets
+- KMS encryption for secrets
+- SSM parameter store for configurations
+- CloudWatch Logs
+- Deploy in VPC to access private resources
+
+### Security - Glue
+- IAM policies for the Glue service
+- Configure Glue to only access JDBC through SSL 
+- Data Catalog: Encrypted by KMS
+- Connection passwords: Encrypted by KMS
+- Data written by AWS Glue – Security Configurations: 
+- S3 encryption mode: SSE-S3 or SSE-KMS
+- CloudWatch encryption mode
+- Job bookmark encryption mode
+
 ## AWS Data Visualization
 
 ### Amazon QuickSight
