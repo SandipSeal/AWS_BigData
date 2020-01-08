@@ -372,6 +372,17 @@ Key Highlights
 #### Kinesis Data Analytics
 - Attach IAM role so it can read from Kinesis Data Streams and reference sources and write to an output destination (example Kinesis Data Firehose)
 
+### Security – DynamoDB
+- Data is encrypted in transit using TLS (HTTPS)
+- DynamoDB can be encrypted at rest
+- KMS encryption for base tables and secondary indexes
+- Only for new tables
+- To migrate un-encrypted table, create new table and copy the data 
+- Encryption cannot be disabled once enabled
+- Access to tables / API / DAX using IAM
+- DynamoDB Streams do not support encryption 
+- VPC Endpoint is provided through a Gateway
+
 ## AWS Data Visualization
 
 ### Amazon QuickSight
