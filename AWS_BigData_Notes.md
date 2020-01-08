@@ -400,6 +400,20 @@ Key Highlights
 - ML-powered forecasting: Uses Random Cut Forest algorithms to detect seasonality and trends
 - Autonaratives: Adds story to data in dashboards
 - Suggested Insights: Provides recomendation to use appropriate insight tool(s).
+12. QuickSight Visual Types:
+- AutoGraph - QuickSight selects the visualization type automatically
+- Bar Chart - Comparison/Histogram
+- Line Graph/Area Chart - Change over time
+- Scatter Plot - Correlation between variables
+- Pie Chart - Aggregarion (group by)
+- Tree Map - Aggregation (group by). Hierarchial Pie Chart. Area of the rectangle is dependent on the aggregated value
+- Pivot Table - Tabular data/intersection of dimensions
+- Stories - 
+- KPI - Compare fact value to the target value
+- Heat Map - Correlation; Each cell colour depends on the value of the measure/KPI variable. Ex - Number of home insurances by country.
+- Gauge Chart - How much of capacity being used
+- Geospatial Chart - Map visualization
+- Word Cloud - Word or Phrase frequency. Size of word/phrase represents the frequency
 
 ## Amazon Redshift:
 
