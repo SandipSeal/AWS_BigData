@@ -411,6 +411,21 @@ Key Highlights
 - CloudWatch encryption mode
 - Job bookmark encryption mode
 
+### Security - EMR
+- Using Amazon EC2 key pair for SSH credentials
+- Attach IAM roles to EC2 instances for:
+      - proper S3 access for EMRFS requests to S3
+      - DynamoDB scans through Hive
+- EC2SecurityGroups
+      - One for master node
+      - Another one for cluster node (core node or task node)
+- Encrypts data at-rest: EBS encryption, Open Source HDFS Encryption, LUKS + EMRFS for S3
+- In-transit encryption: node to node communication, EMRFS, TLS
+- Data is encrypted before uploading to S3
+- Kerberos authentication (provide authentication from Active Directory)
+- Apache Ranger: Centralized Authorization (RBAC – Role Based Access) – setup on external EC2
+- https://aws.amazon.com/blogs/big-data/best-practices-for-securing-amazon-emr/
+
 ### AWS STS - Security Token Service
 1. This service allows users to get temporary access to AWS services. Users can be granted access till 1 hour using STS
 2. STS allows to achieve below functional requirements -
@@ -421,7 +436,9 @@ Key Highlights
       - Define IAM role for another account
       - Define which accounts can access the IAM role
       - Use AWS STS to retrieve the temporary credentials to access the account and impersonate the IAM roles. This is done using               AssumeRole API
-4. 
+      
+### AWS Identity Federation
+
 
 
 
