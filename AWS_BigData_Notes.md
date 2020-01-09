@@ -411,6 +411,20 @@ Key Highlights
 - CloudWatch encryption mode
 - Job bookmark encryption mode
 
+### AWS STS - Security Token Service
+1. This service allows users to get temporary access to AWS services. Users can be granted access till 1 hour using STS
+2. STS allows to achieve below functional requirements -
+- Cross Account Access
+- Federation (using AD credentials)
+- Federation with third party providers/Cognito
+3. Cross Account Access Steps:
+      - Define IAM role for another account
+      - Define which accounts can access the IAM role
+      - Use AWS STS to retrieve the temporary credentials to access the account and impersonate the IAM roles. This is done using               AssumeRole API
+4. 
+
+
+
 ## AWS Data Visualization
 
 ### Amazon QuickSight
@@ -453,6 +467,7 @@ Key Highlights
 - Gauge Chart - How much of capacity being used
 - Geospatial Chart - Map visualization
 - Word Cloud - Word or Phrase frequency. Size of word/phrase represents the frequency
+
 
 ## Amazon Redshift:
 
