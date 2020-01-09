@@ -414,11 +414,11 @@ Key Highlights
 ### Security - EMR
 - Using Amazon EC2 key pair for SSH credentials
 - Attach IAM roles to EC2 instances for:
-      - proper S3 access for EMRFS requests to S3
-      - DynamoDB scans through Hive
+      1. proper S3 access for EMRFS requests to S3
+      2. DynamoDB scans through Hive
 - EC2SecurityGroups
-      - One for master node
-      - Another one for cluster node (core node or task node)
+      1. One for master node
+      2. Another one for cluster node (core node or task node)
 - Encrypts data at-rest: EBS encryption, Open Source HDFS Encryption, LUKS + EMRFS for S3
 - In-transit encryption: node to node communication, EMRFS, TLS
 - Data is encrypted before uploading to S3
