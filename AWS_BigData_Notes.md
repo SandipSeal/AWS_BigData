@@ -394,8 +394,9 @@ Key Highlights
 - MSSQL Server and Oracle support TDE (Transparent Data Encryption)
 
 ### Security - Lambda
-- IAM roles attached to each Lambda function • Sources
-- Targets
+- IAM roles attached to each Lambda function
+      - Sources
+      - Targets
 - KMS encryption for secrets
 - SSM parameter store for configurations
 - CloudWatch Logs
@@ -407,9 +408,9 @@ Key Highlights
 - Data Catalog: Encrypted by KMS
 - Connection passwords: Encrypted by KMS
 - Data written by AWS Glue – Security Configurations: 
-- S3 encryption mode: SSE-S3 or SSE-KMS
-- CloudWatch encryption mode
-- Job bookmark encryption mode
+      - S3 encryption mode: SSE-S3 or SSE-KMS
+      - CloudWatch encryption mode
+      - Job bookmark encryption mode
 
 ### Security - EMR
 - Using Amazon EC2 key pair for SSH credentials
@@ -425,6 +426,43 @@ Key Highlights
 - Kerberos authentication (provide authentication from Active Directory)
 - Apache Ranger: Centralized Authorization (RBAC – Role Based Access) – setup on external EC2
 - https://aws.amazon.com/blogs/big-data/best-practices-for-securing-amazon-emr/
+
+
+### Security – ElasticSearch Service
+- Amazon VPC provides network isolation
+- ElasticSearch policy to manage security further
+- Data security by encrypting data at-rest using KMS
+- Encryption in-transit using SSL
+- IAM or Cognito based authentication
+- Amazon Cognito allow end-users to log-in to Kibana through enterprise identity providers such as Microsoft Active Directory using SAML
+
+### Security - Redshift
+- VPC provides network isolation
+- Cluster security groups
+- Encryption in flight using the JDBC driver enabled with SSL
+- Encryption at rest using KMS or an HSM device (establish a connection)
+- Supports S3 SSE using default managed key
+- Use IAM Roles for Redshift
+- To access other AWS Resources (example S3 or KMS)
+- Must be referenced in the COPY or UNLOAD command (alternatively paste access key and secret key creds)
+
+### Security - Athena
+- IAM policies to control access to the service
+- Data is in S3: IAM policies, bucket policies & ACLs
+- Encryption of data according to S3 standards: SSE-S3, SSE-KMS, CSE-KMS
+- Encryption in transit using TLS between Athena and S3 and JDBC
+- Fine grained access using the AWS Glue Catalog
+
+### Security - Quicksight
+- Standard edition: 
+      -IAM users
+      - Email based accounts
+- Enterprise edition:
+      - Active Directory
+      - Federated Login
+      - Supports MFA (Multi Factor Authentication)
+      - Encryption at rest and in SPICE
+- Row Level Security to control which users can see which rows
 
 ### AWS STS - Security Token Service
 1. This service allows users to get temporary access to AWS services. Users can be granted access till 1 hour using STS
