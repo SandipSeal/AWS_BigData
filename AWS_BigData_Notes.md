@@ -486,13 +486,23 @@ Key Highlights
       - Open ID
       - Cognito
 4. Using federation, you don’t need to create IAM users (user management is outside of AWS)
-#### SAML Federation
+
+#### SAML Federation (for Enterprise)
 
 ![AWS_Resource](https://github.com/SandipSeal/AWS_BigData/blob/master/saml-based-federation.diagram.png)
 
 ![AWS_Console](https://github.com/SandipSeal/AWS_BigData/blob/master/saml-based-sso-to-console.diagram.png)
 
+#### Custom Identity Broker (for Enterprise)
 
+- Use only if identity provider is not compatible with SAML 2.0
+- The identity broker must determine the appropriate IAM policy
+
+![Custom_Identity](https://github.com/SandipSeal/AWS_BigData/blob/master/enterprise-authentication-with-identity-broker-application.diagram.png)
+
+#### Web Identity Federation (for public applications)
+
+![Web_Identity](https://github.com/SandipSeal/AWS_BigData/blob/master/mobile-app-web-identity-federation.diagram.png)
 
 ## AWS Data Visualization
 
