@@ -477,6 +477,20 @@ Key Highlights
       
 ### AWS Identity Federation
 
+1. Federation lets users outside of AWS to assume temporary role for accessing AWS resources.
+2. These users assume identity provided access role.
+3. Federation assumes a form of 3rd party authentication
+      - LDAP
+      - Microsoft Active Directory (~= SAML)
+      - Single Sign On
+      - Open ID
+      - Cognito
+4. Using federation, you don’t need to create IAM users (user management is outside of AWS)
+#### SAML Federation
+
+![AWS_Resource](https://github.com/SandipSeal/AWS_BigData/blob/master/saml-based-federation.diagram.png)
+
+![AWS_Console](https://github.com/SandipSeal/AWS_BigData/blob/master/saml-based-sso-to-console.diagram.png)
 
 
 
