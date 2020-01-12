@@ -189,16 +189,13 @@ AWS IoT Architecture:
 - Allows to execute AWS Lambda
 - Can operate offline
 
-
-
-
 ## Amazon DynamoDB:
 
 1. Fully managed; supports both key/value and document data models.
 2. DynamoDB is highly scalable, highly available. It uses SSD for storage
 3. Each table in DynamoDB must have a primary key; primary key must be selected at the time of table creation. Each row in DynamoDB table is called an item. The maximum size of an item can be 400 KB. 
 4. RCU and WCU of a table are split across all the partitions in a table. If RCU is 100 and the table has 4 partitions then each partition will get 25 RCU.
-5. A single parition can hold only 10GB of data. Each parition can support max 3000 RCU and 1000 WCU. Partition can be increased but cannot be decreased.
+5. A single parition can hold only 10GB of data. Each parition can support max 3000 RCU and 1000 WCU. Partition can be increased but cannot be decreased. Each partition key belongs to only one partition in DynamoDB table.
 6. Amazon DynamoDB RCU & WCU
 WCU: 1 WCU = 1 write per second for an item of size upto 1 KB.
 RCU: 1 RCU = 1 Strong consistent read or 2 eventual consistent read per second for an item of size upto 4 KB
@@ -210,11 +207,20 @@ RCU: 1 RCU = 1 Strong consistent read or 2 eventual consistent read per second f
 9. DynamoDB supports 2 types of indeces - Local Secondary Index (LSI) and Global Secondary Index (GSI)
       LSI - This must be created at the time of table creation. LSI is local to the table partition key
       GSI - This can be added to the table after creation. GSI creates a table under the hood for maintaining the index. User needs to define RCU & WCU separately for the index.
+      - Local Secondary Index contains - Partition, old Sort key and New Sort key + Optional Projected values
+      - Any data written to the table is copied async to any LSI
+      - Shares WCU & RCU with the table
+      - LSI is a sparse index. The Index will only have an item (row) if the new sort index key attribute is contained in the original           table item (row)
+      - ItemCollections - set of rows that have same partition key and all of its LSI rows. Max size of ItemCollection is 10GB/table.
+      - GSI has the concept as LSI but it allows to define an alternative partition & sort key
+      - Unlike LSI where WCU & RCU are share with main tables, RCU & WCU are defined for the GSI - same way as table
+      - Changes made to the table are asynchronously applied to GSI
 10. DynamoDB DAX is a cache layer on top of DynamoDB. 
 11. DynamoDB change logs can be sent to a stream (can be enabled at table level). DynamoDB stream can be consumed by Lambda function for appropriate actions; also the stream can be consumed by Kinesis (using KCL library). Data is retained in streams for 24 hours.
 12. DynamoDB TTL defines the timestamp till which an item will be valid in a table. Once the TTL is passed the respective items will be expired in the table and won't consume any WCU/RCU. DynamoDB typically deletes the expired item within 48 hours of expiry.
 13. The deleted items due to TTL also deletes the items in index tables (in case of GSI).
 14. All the changes (Insert/Update/Delete) made to a DynamoDB table are sent to a stream. DynamoDB stream can be read by AWS Lambda. Stream persists the data for max 24 hours. DynamoDB stream can also feed Kinesis using KCL.
+15. In a DynamoDB table having more than one partition, the data is distributed using partition key (Hash Value)
 
 ## Elastic MapReduce:
 
