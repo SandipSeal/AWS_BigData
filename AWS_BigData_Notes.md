@@ -221,6 +221,18 @@ RCU: 1 RCU = 1 Strong consistent read or 2 eventual consistent read per second f
 13. The deleted items due to TTL also deletes the items in index tables (in case of GSI).
 14. All the changes (Insert/Update/Delete) made to a DynamoDB table are sent to a stream. DynamoDB stream can be read by AWS Lambda. Stream persists the data for max 24 hours. DynamoDB stream can also feed Kinesis using KCL.
 15. In a DynamoDB table having more than one partition, the data is distributed using partition key (Hash Value)
+16. Criteria of a good partition key in DynamoDB table:
+      - The atribute should have any distinct values
+      - The attribute should have a uniform write pattern accross the key space
+      - The attribute should have uniform temporal write pattern accross time
+      - If any of the above is not possible to achieve then a synthetic/hybrid value should be considered
+      - Should not mix HOT & COLD key values in a table
+17. Adaptive capacity feature enables DynamoDB to accommodate imbalanced workloads. With adaptive capacity, users don’t need to overprovision read and write throughput. The unused capacity (WCU/RCU) of less access partitions is allocated/loaned to highly accessed partitions.
+18. In DynamoDB, you have the option to specify conditions when granting permissions using an IAM policy (see Access Control). For example, you can:
+
+- Grant permissions to allow users read-only access to certain items and attributes in a table or a secondary index.
+- Grant permissions to allow users write-only access to certain attributes in a table, based upon the identity of that user.
+
 
 ## Elastic MapReduce:
 
@@ -574,6 +586,7 @@ Key Highlights
 14. Redshift stores data in filesystem in the sorted order of sort key. Block-size in Redshift is 1 MB. Zone maps keep track of the min & max value in each block. If the data is not loaded in the order of the sort key then all the blocks will be scanned; vaccum command will be needed to be performed. 
 15. 2 types of the sort key - compound & interleaved. With compound sort keys table is sorted by column values listed in the sort key order. Query performance may be degraded if it does include the primary sort column.
 16. Interleaved sort key gives equal importance to all the sort columns. Data loading/vacuum operation is slower with interleave sort keys. It is useful for very large tables only. Not good for the table where data is loaded in sort orders.
+      - An interleaved sort gives equal weight to each column, or subset of columns, in the sort key. If multiple queries use different         columns for filters, then you can often improve performance for those queries by using an interleaved sort style. When a query           uses restrictive predicates on secondary sort columns, interleaved sorting significantly improves query performance as compared         to compound sorting.
 17. Redshift support compression scheme at each column level. Compression scheme can be defined during table creation. AWS recomends automatic compression. Once data is loaded first time into the table, compression is automatically applied by AWS. Compression can be applied manually using analyze command. Analyse commands provide suggestion for compression and after that DDL hasto be updated manually.
 18. Table constraints (except NOT NULL) is not physically enforced in Redshift.
 19. Data in s3 can be easily loaded into Redshift using simple COPY command. Other than s3, data can be directly loaded from AWS EMR, EC2 instance and DynamoDB. Kinesis, Kinesis Firehose, AWS DMS loads data first to s3 before loading the same into Redshift. 
