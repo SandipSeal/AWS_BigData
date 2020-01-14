@@ -564,6 +564,7 @@ Key Highlights
 - Gauge Chart - How much of capacity being used
 - Geospatial Chart - Map visualization
 - Word Cloud - Word or Phrase frequency. Size of word/phrase represents the frequency
+13. QuickSight supported data sources - https://docs.aws.amazon.com/quicksight/latest/user/supported-data-sources.html
 
 
 ## Amazon Redshift:
