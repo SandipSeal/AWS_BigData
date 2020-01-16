@@ -648,7 +648,7 @@ To have the AWS Glue crawler create two separate tables, set the crawler to have
       - Ensures data consistency when loaded from s3
 manifest is defined in JSON format. 
 24. File formats supported by COPY command - CSV, delimited, fixed width, JSON, Avro. 
-25. Error checking - STL_LOAD_ERRORS, STL_LOADERROR_DETAIL. These 2 tables can be joined for more detailed info. 
+25. Error checking - STL_LOAD_ERRORS, STL_LOADERROR_DETAIL. These 2 tables can be joined for more detailed info. System tables and views do not use the same consistency model as regular tables. It is important to be aware of this issue when querying them, especially for STV tables and SVV views.
 26. UPSERT is not supported in Redshift. Need to use combination of delete & insert or update (by joining target & staging tables)
 27. COPY command can load encrypted files in s3. COPY command can load files encrypted using SSE s3, SSE-KMS; also supports client side encryption using client-side symmetric master key. SSE-C, client side encryption using KMS, client side encruption using asymmetric master key is not supported in COPY command. 
 28. UNLOAD command exports data to one or more files in s3. Automatically applies SSE-s3 encryption. UNLOAD supports SSE-KMS and client side encryption using customer-managed key (CSE-CMK). UNLOAD does not support SSE-C encryption.
@@ -663,4 +663,18 @@ manifest is defined in JSON format.
       - PostgreSQL fdw (Foreign Data Wrapper) - This extension is very slow for large number of rows.
       - Dblink - This extension pushes all the query complexity to RedShift
       https://aws.amazon.com/blogs/big-data/join-amazon-redshift-and-amazon-rds-postgresql-with-dblink/
-37. 
+37. If your data has a fixed retention period, you can organize your data as a sequence of time-series tables. In such a sequence, each table is identical but contains data for different time ranges.
+38. Amazon Redshift Advisor Recommendations<a name="advisor-recommendations"></a>
+
+Amazon Redshift Advisor offers recommendations about how to optimize your Amazon Redshift cluster to increase performance and save on operating costs. 
+
++ [Compress Table Data](#cluster-compression-recommendation)
++ [Compress Amazon S3 File Objects Loaded by COPY](#cluster-compress-s3-recommendation)
++ [Isolate Multiple Active Databases](#isolate-active-dbs-recommendation)
++ [Reallocate Workload Management \(WLM\) Memory](#reallocate-wlm-recommendation)
++ [Skip Compression Analysis During COPY](#skip-compression-analysis-recommendation)
++ [Split Amazon S3 Objects Loaded by COPY](#split-s3-objects-recommendation)
++ [Update Table Statistics](#update-table-statistics-recommendation)
++ [Enable Short Query Acceleration](#enable-sqa-recommendation)
++ [Replace Single\-Column Interleaved Sort Keys](#single-column-interleaved-sort-recommendation)
++ [Alter Distribution Keys on Tables](#alter-diststyle-distkey-recommendation)
