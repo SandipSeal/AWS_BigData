@@ -233,8 +233,7 @@ RCU: 1 RCU = 1 Strong consistent read or 2 eventual consistent read per second f
 - Grant permissions to allow users read-only access to certain items and attributes in a table or a secondary index.
 - Grant permissions to allow users write-only access to certain attributes in a table, based upon the identity of that user.
 19. Using Amazon DynamoDB global tables, you can replicate your table data across AWS Regions\. It is important that the replica tables and secondary indexes in your global table have identical write capacity settings to ensure proper replication of data\.
-### Requirements for Adding a New Replica Table
-
+20. Requirements for Adding a New Replica Table
 If you want to add a new replica table to a global table, each of the following conditions must be true:
 + The table must have the same partition key as all of the other replicas\.
 + The table must have the same write capacity management settings specified\.
@@ -245,7 +244,19 @@ If you want to add a new replica table to a global table, each of the following 
  If global secondary indexes are specified, then the following conditions must also be met: 
 +  The global secondary indexes must have the same name\. 
 +  The global secondary indexes must have the same partition key and sort key \(if present\)\. 
+21. Best Practices and Requirements for Managing Capacity
 
+Consider the following when managing capacity settings for replica tables in DynamoDB\.
+
+### Using DynamoDB Auto Scaling
+
+Using DynamoDB auto scaling is the recommended way to manage throughput capacity settings for replica tables that use the provisioned mode\. DynamoDB auto scaling automatically adjusts read capacity units \(RCUs\) and write capacity units \(WCUs\) for each replica table based upon your actual application workload\.
+
+### Managing Capacity Manually
+
+If you decide not to use DynamoDB auto scaling, then you must manually set the read capacity and write capacity settings on each replica table and secondary index\.
+
+The provisioned replicated write capacity units \(rWCUs\) on every replica table should be set to the total number of rWCUs needed for application writes across all Regions multiplied by two\. This will accommodate application writes that occur in the local Region and replicated application writes coming from other Regions\. For example, if you expect 5 writes per second to your replica table in Ohio and 5 writes per second to your replica table in N\.Virginia, then you should provision 20 WCUs to each replica table \(5 \+ 5 = 10; 10 x 2 = 20\)\.
 
 ## Elastic MapReduce:
 
