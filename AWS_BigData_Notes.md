@@ -200,7 +200,7 @@ AWS IoT Architecture:
 WCU: 1 WCU = 1 write per second for an item of size upto 1 KB.
 RCU: 1 RCU = 1 Strong consistent read or 2 eventual consistent read per second for an item of size upto 4 KB
 7. If RCU/WCU are exceed then 'ProvisionedThroughputExceededException' occurs
-8 Calculating the number of partitions required in a DynamoDB table:
+8. Calculating the number of partitions required in a DynamoDB table:
       By Capacity = Total size of the table / 10GB
       By throughput = (RCU/3000) + (WCU/1000)
       Num Partitions = Max (capacity,throughput)
@@ -217,8 +217,10 @@ RCU: 1 RCU = 1 Strong consistent read or 2 eventual consistent read per second f
       - Changes made to the table are asynchronously applied to GSI
 10. DynamoDB DAX is a cache layer on top of DynamoDB. 
 11. DynamoDB change logs can be sent to a stream (can be enabled at table level). DynamoDB stream can be consumed by Lambda function for appropriate actions; also the stream can be consumed by Kinesis (using KCL library). Data is retained in streams for 24 hours.
-12. DynamoDB TTL defines the timestamp till which an item will be valid in a table. Once the TTL is passed the respective items will be expired in the table and won't consume any WCU/RCU. DynamoDB typically deletes the expired item within 48 hours of expiry.
-13. The deleted items due to TTL also deletes the items in index tables (in case of GSI).
+12. DynamoDB TTL defines the timestamp till which an item will be valid in a table. Once the TTL is passed the respective items will be expired in the table and won't consume any WCU/RCU. DynamoDB typically deletes the expired item within 48 hours of expiry.When Time to Live (TTL) is enabled on a table in Amazon DynamoDB, a background job checks the TTL attribute of items to determine whether they are expired.
+13. The deleted items due to TTL also deletes the items in index tables (in case of GSI). TTL compares the current time in epoch time format to the time stored in the Time to Live attribute of an item. If the epoch time value stored in the attribute is less than the current time, the item is marked as expired and then deleted. This processing takes place automatically in the background and does not affect read or write traffic to the table. 
+**Note**  
+ The epoch time format is the number of seconds elapsed since 12:00:00 AM January 1st, 1970 UTC\. 
 14. All the changes (Insert/Update/Delete) made to a DynamoDB table are sent to a stream. DynamoDB stream can be read by AWS Lambda. Stream persists the data for max 24 hours. DynamoDB stream can also feed Kinesis using KCL.
 15. In a DynamoDB table having more than one partition, the data is distributed using partition key (Hash Value)
 16. Criteria of a good partition key in DynamoDB table:
@@ -235,15 +237,15 @@ RCU: 1 RCU = 1 Strong consistent read or 2 eventual consistent read per second f
 19. Using Amazon DynamoDB global tables, you can replicate your table data across AWS Regions\. It is important that the replica tables and secondary indexes in your global table have identical write capacity settings to ensure proper replication of data\.
 20. Requirements for Adding a New Replica Table
 If you want to add a new replica table to a global table, each of the following conditions must be true:
-+ The table must have the same partition key as all of the other replicas\.
-+ The table must have the same write capacity management settings specified\.
-+ The table must have the same name as all of the other replicas\.
-+ The table must have DynamoDB Streams enabled, with the stream containing both the new and the old images of the item\.
-+ None of the new or existing replica tables in the global table can contain any data\.
+      + The table must have the same partition key as all of the other replicas\.
+      + The table must have the same write capacity management settings specified\.
+      + The table must have the same name as all of the other replicas\.
+      + The table must have DynamoDB Streams enabled, with the stream containing both the new and the old images of the item\.
+      + None of the new or existing replica tables in the global table can contain any data\.
 
- If global secondary indexes are specified, then the following conditions must also be met: 
-+  The global secondary indexes must have the same name\. 
-+  The global secondary indexes must have the same partition key and sort key \(if present\)\. 
+If global secondary indexes are specified, then the following conditions must also be met: 
+      +  The global secondary indexes must have the same name\. 
+      +  The global secondary indexes must have the same partition key and sort key \(if present\)\. 
 21. Best Practices and Requirements for Managing Capacity
 
 Consider the following when managing capacity settings for replica tables in DynamoDB\.
@@ -590,6 +592,27 @@ Key Highlights
 - Word Cloud - Word or Phrase frequency. Size of word/phrase represents the frequency
 13. QuickSight supported data sources - https://docs.aws.amazon.com/quicksight/latest/user/supported-data-sources.html
 
+## AWS Athena
+
+1. When using Athena with the AWS Glue Data Catalog, you can use AWS Glue to create databases and tables (schema) to be queried in Athena, or you can use Athena to create schema and then use them in AWS Glue and related services. This topic provides considerations and best practices when using either method.
+2. Under the hood, Athena uses Presto to execute DML statements and Hive to execute the DDL statements that create and modify schema. With these technologies, there are a couple of conventions to follow so that Athena and AWS Glue work well together.
+3. Using Multiple Data Sources with Crawlers:
+When an AWS Glue Crawler scans Amazon S3 and detects multiple directories, it uses a heuristic to determine where the root for a table is in the directory structure, and which directories are partitions for the table\. In some cases, where the schema detected in two or more directories is similar, the crawler may treat them as partitions instead of separate tables\. One way to help the crawler discover individual tables is to add each table's root directory as a data store for the crawler\.
+
+The following partitions in Amazon S3 are an example:
+
+```
+s3://bucket01/folder1/table1/partition1/file.txt
+s3://bucket01/folder1/table1/partition2/file.txt
+s3://bucket01/folder1/table1/partition3/file.txt
+s3://bucket01/folder1/table2/partition4/file.txt
+s3://bucket01/folder1/table2/partition5/file.txt
+```
+
+If the schema for `table1` and `table2` are similar, and a single data source is set to `s3://bucket01/folder1/` in AWS Glue, the crawler may create a single table with two partition columns: one partition column that contains `table1` and `table2`, and a second partition column that contains `partition1` through `partition5`\.
+
+To have the AWS Glue crawler create two separate tables, set the crawler to have two data sources, `s3://bucket01/folder1/table1/` and `s3://bucket01/folder1/table2`, as shown in the following procedure\.
+
 
 ## Amazon Redshift:
 
@@ -617,11 +640,12 @@ Key Highlights
 19. Data in s3 can be easily loaded into Redshift using simple COPY command. Other than s3, data can be directly loaded from AWS EMR, EC2 instance and DynamoDB. Kinesis, Kinesis Firehose, AWS DMS loads data first to s3 before loading the same into Redshift. 
 20. Transfering data to AWS - upload to s3 over internet, Direct Connect, AWS Export/Import, Snowball/Snowmobil. 
 21. Splitting a lagre data file into smaller chunks enhances the performance of the COPY command. Number of data files should be equal oor multiple of the number of slices. 
-22. Large files can be compressed before loading - gzip, lzip, bzip2. File size should be even size as possible. File size after after split should be of size betweeen 1 MB to 1 GB.
-23. Manifest - 
-      Load required files only
-      Load from different s3 buckets
-      Load files with different prefix
+22. Large files can be compressed before loading - gzip, lzip, bzip2. File size should be even size as possible. File size after after split should be of size betweeen 1 MB to 1 GB. For optimum parallelism, the ideal size is between 1 MB and 125 MB after compression. The number of files should be a multiple of the number of slices in your cluster. 
+23. Manifest File - 
+      - Load required files only
+      - Load from different s3 buckets
+      - Load files with different prefix
+      - Ensures data consistency when loaded from s3
 manifest is defined in JSON format. 
 24. File formats supported by COPY command - CSV, delimited, fixed width, JSON, Avro. 
 25. Error checking - STL_LOAD_ERRORS, STL_LOADERROR_DETAIL. These 2 tables can be joined for more detailed info. 
@@ -639,3 +663,4 @@ manifest is defined in JSON format.
       - PostgreSQL fdw (Foreign Data Wrapper) - This extension is very slow for large number of rows.
       - Dblink - This extension pushes all the query complexity to RedShift
       https://aws.amazon.com/blogs/big-data/join-amazon-redshift-and-amazon-rds-postgresql-with-dblink/
+37. 
