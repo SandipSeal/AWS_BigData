@@ -232,6 +232,19 @@ RCU: 1 RCU = 1 Strong consistent read or 2 eventual consistent read per second f
 
 - Grant permissions to allow users read-only access to certain items and attributes in a table or a secondary index.
 - Grant permissions to allow users write-only access to certain attributes in a table, based upon the identity of that user.
+19. Using Amazon DynamoDB global tables, you can replicate your table data across AWS Regions\. It is important that the replica tables and secondary indexes in your global table have identical write capacity settings to ensure proper replication of data\.
+### Requirements for Adding a New Replica Table
+
+If you want to add a new replica table to a global table, each of the following conditions must be true:
++ The table must have the same partition key as all of the other replicas\.
++ The table must have the same write capacity management settings specified\.
++ The table must have the same name as all of the other replicas\.
++ The table must have DynamoDB Streams enabled, with the stream containing both the new and the old images of the item\.
++ None of the new or existing replica tables in the global table can contain any data\.
+
+ If global secondary indexes are specified, then the following conditions must also be met: 
++  The global secondary indexes must have the same name\. 
++  The global secondary indexes must have the same partition key and sort key \(if present\)\. 
 
 
 ## Elastic MapReduce:
