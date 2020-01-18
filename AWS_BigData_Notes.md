@@ -207,13 +207,13 @@ RCU: 1 RCU = 1 Strong consistent read or 2 eventual consistent read per second f
 9. DynamoDB supports 2 types of indeces - Local Secondary Index (LSI) and Global Secondary Index (GSI)
       LSI - This must be created at the time of table creation. LSI is local to the table partition key
       GSI - This can be added to the table after creation. GSI creates a table under the hood for maintaining the index. User needs to define RCU & WCU separately for the index.
-      - Local Secondary Index contains - Partition, old Sort key and New Sort key + Optional Projected values
+      - Local Secondary Index contains - Partition key, New Sort Key and old Sort key (if exists) + Optional Projected values
       - Any data written to the table is copied async to any LSI
       - Shares WCU & RCU with the table
       - LSI is a sparse index. The Index will only have an item (row) if the new sort index key attribute is contained in the original           table item (row)
       - ItemCollections - set of rows that have same partition key and all of its LSI rows. Max size of ItemCollection is 10GB/table.
       - GSI has the concept as LSI but it allows to define an alternative partition & sort key
-      - Unlike LSI where WCU & RCU are share with main tables, RCU & WCU are defined for the GSI - same way as table
+      - Unlike LSI where WCU & RCU are not shared with main tables, RCU & WCU are defined for the GSI - same way as table
       - Changes made to the table are asynchronously applied to GSI
 10. DynamoDB DAX is a cache layer on top of DynamoDB. 
 11. DynamoDB change logs can be sent to a stream (can be enabled at table level). DynamoDB stream can be consumed by Lambda function for appropriate actions; also the stream can be consumed by Kinesis (using KCL library). Data is retained in streams for 24 hours.
@@ -558,7 +558,7 @@ Key Highlights
 4. QuckSight imports the data from the sources into the SPICE engine. SPICE stands for -
 - SuperFast, Parallel, In-Memory Processing Engine.
 5. SPICE uses columnar data storage. SPICE accelerates query on large datasets.
-6. Each user get 10GB space in SPICE
+6. Each user gets 10GB space in SPICE
 7. QuickSight can scale out to hundreds of thousands of users
 8. QuickSight Anti-Patterns:
 - Highly formatted canned reports/dashboards
@@ -570,7 +570,8 @@ Key Highlights
 - Private VPC access
 10. QuickSight User Management:
 - Standard Edition: via IAM or E-Mail sign-up
-- Enterprise Edition allows Active Directory (AD) integration. This version allows encryption at rest
+- Enterprise Edition allows Active Directory (AD) integration, Federated logins, E-Mail sign-up
+This version allows encryption at rest
 11. QuickSight Machine Learning Insights
 - ML-powered anomaly detection: Uses Random Cut Forest algorithm to find out the top contributors to change in metrics
 - ML-powered forecasting: Uses Random Cut Forest algorithms to detect seasonality and trends
@@ -591,6 +592,7 @@ Key Highlights
 - Geospatial Chart - Map visualization
 - Word Cloud - Word or Phrase frequency. Size of word/phrase represents the frequency
 13. QuickSight supported data sources - https://docs.aws.amazon.com/quicksight/latest/user/supported-data-sources.html
+14. Row Level Security - https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html#create-data-set-rules-for-row-level-security
 
 ## AWS Athena
 
@@ -613,6 +615,13 @@ If the schema for `table1` and `table2` are similar, and a single data source is
 
 To have the AWS Glue crawler create two separate tables, set the crawler to have two data sources, `s3://bucket01/folder1/table1/` and `s3://bucket01/folder1/table2`, as shown in the following procedure\.
 
+## Storage Gateway:
+1. AWS Storage Gateway connects an on-premises software appliance with cloud-based storage to provide seamless integration with data security features between your on-premises IT environment and the AWS storage infrastructure. You can use the service to store data in the AWS Cloud for scalable and cost-effective storage that helps maintain data security.
+2. **File Gateway** – A file gateway supports a file interface into Amazon Simple Storage Service \(Amazon S3\) and combines a service and a virtual software appliance\.
+3. **Volume Gateway** – A volume gateway provides cloud\-backed storage volumes that you can mount as Internet Small Computer System Interface \(iSCSI\) devices from your on\-premises application servers\. The gateway supports the following volume configurations:
++ **Cached volumes** – You store your data in Amazon Simple Storage Service \(Amazon S3\) and retain a copy of frequently accessed data subsets locally\. Cached volumes offer a substantial cost savings on primary storage and minimize the need to scale your storage on\-premises\. You also retain low\-latency access to your frequently accessed data\.
++ **Stored volumes** – If you need low\-latency access to your entire dataset, first configure your on\-premises gateway to store all your data locally\. Then asynchronously back up point\-in\-time snapshots of this data to Amazon S3\.
+4. **Tape Gateway** – With a tape gateway, you can cost\-effectively and durably archive backup data in GLACIER or DEEP\_ARCHIVE\. A tape gateway provides a virtual tape infrastructure that scales seamlessly with your business needs and eliminates the operational burden of provisioning, scaling, and maintaining a physical tape infrastructure\. 
 
 ## Amazon Redshift:
 
