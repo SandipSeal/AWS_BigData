@@ -548,6 +548,20 @@ Key Highlights
 
 ![Web_Identity](https://github.com/SandipSeal/AWS_BigData/blob/master/mobile-app-web-identity-federation.diagram.png)
 
+### IAM Policy Elements: Variables and Tags
+
+1. Below are the examples for IAM policy variables -
+      - https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies _variables.html
+      - ${aws:username} : to restrict users to tables / buckets
+      - ${aws:principaltype} : account, user, federated, or assumed role
+      - ${aws:PrincipalTag/department} : to restrict using Tags
+
+2. Below are the examples for federated IAM policy variables -
+      - https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies _iam-condition-keys.html#condition-keys-wif
+      - ${aws:FederatedProvider} : which IdP was used for the user (Cognito, Amazon..)
+      - ${www.amazon.com:user_id} , ${cognito-identity.amazonaws.com:sub} ...
+      - ${saml:sub}, ${sts:ExternalId}
+      
 ## AWS Data Visualization
 
 ### Amazon QuickSight
