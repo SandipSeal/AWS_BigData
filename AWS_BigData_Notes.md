@@ -687,7 +687,9 @@ manifest is defined in JSON format.
       - Dblink - This extension pushes all the query complexity to RedShift
       https://aws.amazon.com/blogs/big-data/join-amazon-redshift-and-amazon-rds-postgresql-with-dblink/
 37. If your data has a fixed retention period, you can organize your data as a sequence of time-series tables. In such a sequence, each table is identical but contains data for different time ranges.
-38. Amazon Redshift Advisor Recommendations<a name="advisor-recommendations"></a>
+38. AWS RedShift Blogs (Imp)-
+- https://aws.amazon.com/blogs/big-data/run-mixed-workloads-with-amazon-redshift-workload-management/
+39. Amazon Redshift Advisor Recommendations<a name="advisor-recommendations"></a>
 
 Amazon Redshift Advisor offers recommendations about how to optimize your Amazon Redshift cluster to increase performance and save on operating costs. 
 
@@ -701,5 +703,3 @@ Amazon Redshift Advisor offers recommendations about how to optimize your Amazon
 + [Enable Short Query Acceleration](#enable-sqa-recommendation)
 + [Replace Single\-Column Interleaved Sort Keys](#single-column-interleaved-sort-recommendation)
 + [Alter Distribution Keys on Tables](#alter-diststyle-distkey-recommendation)
-39. AWS RedShift Blogs (Imp)-
-- https://aws.amazon.com/blogs/big-data/run-mixed-workloads-with-amazon-redshift-workload-management/
