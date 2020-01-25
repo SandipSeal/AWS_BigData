@@ -689,8 +689,8 @@ manifest is defined in JSON format.
 37. If your data has a fixed retention period, you can organize your data as a sequence of time-series tables. In such a sequence, each table is identical but contains data for different time ranges.
 38. AWS RedShift Blogs (Imp)-
 - https://aws.amazon.com/blogs/big-data/run-mixed-workloads-with-amazon-redshift-workload-management/
+      
 39. Amazon Redshift Advisor Recommendations<a name="advisor-recommendations"></a>
-
 Amazon Redshift Advisor offers recommendations about how to optimize your Amazon Redshift cluster to increase performance and save on operating costs. 
 
 + [Compress Table Data](#cluster-compression-recommendation)
