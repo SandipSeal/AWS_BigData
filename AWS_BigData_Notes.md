@@ -701,3 +701,5 @@ Amazon Redshift Advisor offers recommendations about how to optimize your Amazon
 + [Enable Short Query Acceleration](#enable-sqa-recommendation)
 + [Replace Single\-Column Interleaved Sort Keys](#single-column-interleaved-sort-recommendation)
 + [Alter Distribution Keys on Tables](#alter-diststyle-distkey-recommendation)
+39. AWS RedShift Blogs (Imp)-
+- https://aws.amazon.com/blogs/big-data/run-mixed-workloads-with-amazon-redshift-workload-management/
