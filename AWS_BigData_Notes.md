@@ -157,7 +157,11 @@ You can also join streams. For examples of joining streams, see Streaming Data O
 - SSE-KMS
 - Client Side Encryption with KMS key <br />
 Athena does not support SSE with customer-provided keys (SSE-C), nor does it support client-side encryption using a client-side master key.
-      
+3. The setup for querying an encrypted dataset in Amazon S3 and the options in Athena to encrypt query results are independent. Each option is enabled and configured separately. You can use different encryption methods or keys for each. This means that reading encrypted data in Amazon S3 doesn't automatically encrypt Athena query results in Amazon S3. The opposite is also true. Encrypting Athena query results in Amazon S3 doesn't encrypt the underlying dataset in Amazon S3.
+4. Regardless of whether you use options for encrypting data at rest in Amazon S3, transport layer security (TLS) encrypts objects in-transit between Athena resources and between Athena and Amazon S3. Query results that stream to JDBC or ODBC clients are encrypted using TLS.
+5. Users need to have additional IAM permission for AWS KMS to access the data in s3 encrypted by AWS KMS encryption key. 
+6. In addition to encrypting data at rest in Amazon S3, Amazon Athena uses Transport Layer Security (TLS) encryption for data in-transit between Athena and Amazon S3, and between Athena and customer applications accessing it.
+
 ## AWS IoT
 
 AWS IoT Architecture:
@@ -274,6 +278,10 @@ Using DynamoDB auto scaling is the recommended way to manage throughput capacity
 If you decide not to use DynamoDB auto scaling, then you must manually set the read capacity and write capacity settings on each replica table and secondary index\.
 
 The provisioned replicated write capacity units \(rWCUs\) on every replica table should be set to the total number of rWCUs needed for application writes across all Regions multiplied by two\. This will accommodate application writes that occur in the local Region and replicated application writes coming from other Regions\. For example, if you expect 5 writes per second to your replica table in Ohio and 5 writes per second to your replica table in N\.Virginia, then you should provision 20 WCUs to each replica table \(5 \+ 5 = 10; 10 x 2 = 20\)\.
+
+22. You can use Amazon CloudWatch to monitor the behavior and performance of a global table. Amazon DynamoDB publishes ReplicationLatency and PendingReplicationCount metrics for each replica in the global table.
+- ReplicationLatency—The elapsed time between when an updated item appears in the DynamoDB stream for one replica table, and when that item appears in another replica in the global table.
+- PendingReplicationCount—The number of item updates that are written to one replica table, but that have not yet been written to another replica in the global table.
 
 ## Elastic MapReduce:
 
