@@ -144,6 +144,19 @@ You can also join streams. For examples of joining streams, see Streaming Data O
       SSE-C:Encryption key is provided by client. Data Key is passed in the header. Possible in API call only.
       Client side encryption: Data is encrypted by client before sending to AWS
 16. Amazon exposes both HTTP & HTTPS end-points. HTTPS must be used for SSE-C
+
+## AWS Athena
+
+### Athena Security
+
+1. Following Data can be encrypted in Athena -
+- Results of all the query output in AWS S3
+- AWS Glue data catalog
+2. Following S3 encryptions are supported in Athena -
+- SSE-S3
+- SSE-KMS
+- Client Side Encryption with KMS key <br />
+Athena does not support SSE with customer-provided keys (SSE-C), nor does it support client-side encryption using a client-side master key.
       
 ## AWS IoT
 
