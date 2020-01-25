@@ -72,6 +72,8 @@ Note: Consumer Classic - 2 MB/Sec read capacity per shard across all consumers
  
 ### Kinesis Data Analytics
 
+![Kinesis_Analytics](https://github.com/SandipSeal/AWS_BigData/blob/master/kinesis-app.png)
+
 1. In-Application streams are created for intermediate storage of data from streaming sources and this facilitae running SQL query on streaming data.
 
 2. Data in ingested into In-Application streams in 2 steps:
