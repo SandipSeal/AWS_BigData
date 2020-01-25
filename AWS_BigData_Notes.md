@@ -647,50 +647,50 @@ To have the AWS Glue crawler create two separate tables, set the crawler to have
 6. Amazon s3 is the main source of loading data into Redshift. COPY command example below:
       COPY <Table Name> <s3 bucket/path> CREDENTIALS <credential>
 7. COPY command can load data from DynamoDB, EMR, EC2 instance. AWS Data Pipeline can automate the ETL workflow. Also, AWS DMS can be used to migrate data into Redshift. Data can be loaded into Redshift using Kinesis.
-10. Data can be exported to s3 using the UNLOAD command.
-11. Redshift is a columnar database. It provides efficiency in data storage. Single line insert performs poorly in Redshift.
-12. Primary Key and Foreign Key can be created in Redshift but referential integrity is not maintained in the database. 
-13. REdshift support 3 dustribution styles -
+8. Data can be exported to s3 using the UNLOAD command.
+9. Redshift is a columnar database. It provides efficiency in data storage. Single line insert performs poorly in Redshift.
+10. Primary Key and Foreign Key can be created in Redshift but referential integrity is not maintained in the database. 
+11. REdshift support 3 dustribution styles -
       Even: Rows are distributed across the slices regardless of the value in a particular column.This is default distribution style.
       Key Distribution: Same keys reside in the same slice. Usefule for large table joins.
       All: Entire Table is copied into each slide. Good for small dimension/lookup tables
-14. Redshift stores data in filesystem in the sorted order of sort key. Block-size in Redshift is 1 MB. Zone maps keep track of the min & max value in each block. If the data is not loaded in the order of the sort key then all the blocks will be scanned; vaccum command will be needed to be performed. 
-15. 2 types of the sort key - compound & interleaved. With compound sort keys table is sorted by column values listed in the sort key order. Query performance may be degraded if it does include the primary sort column.
-16. Interleaved sort key gives equal importance to all the sort columns. Data loading/vacuum operation is slower with interleave sort keys. It is useful for very large tables only. Not good for the table where data is loaded in sort orders.
+12. Redshift stores data in filesystem in the sorted order of sort key. Block-size in Redshift is 1 MB. Zone maps keep track of the min & max value in each block. If the data is not loaded in the order of the sort key then all the blocks will be scanned; vaccum command will be needed to be performed. 
+13. 2 types of the sort key - compound & interleaved. With compound sort keys table is sorted by column values listed in the sort key order. Query performance may be degraded if it does include the primary sort column.
+14. Interleaved sort key gives equal importance to all the sort columns. Data loading/vacuum operation is slower with interleave sort keys. It is useful for very large tables only. Not good for the table where data is loaded in sort orders.
       - An interleaved sort gives equal weight to each column, or subset of columns, in the sort key. If multiple queries use different         columns for filters, then you can often improve performance for those queries by using an interleaved sort style. When a query           uses restrictive predicates on secondary sort columns, interleaved sorting significantly improves query performance as compared         to compound sorting.
-17. Redshift support compression scheme at each column level. Compression scheme can be defined during table creation. AWS recomends automatic compression. Once data is loaded first time into the table, compression is automatically applied by AWS. Compression can be applied manually using analyze command. Analyse commands provide suggestion for compression and after that DDL hasto be updated manually.
-18. Table constraints (except NOT NULL) is not physically enforced in Redshift.
-19. Data in s3 can be easily loaded into Redshift using simple COPY command. Other than s3, data can be directly loaded from AWS EMR, EC2 instance and DynamoDB. Kinesis, Kinesis Firehose, AWS DMS loads data first to s3 before loading the same into Redshift. 
-20. Transfering data to AWS - upload to s3 over internet, Direct Connect, AWS Export/Import, Snowball/Snowmobil. 
-21. Splitting a lagre data file into smaller chunks enhances the performance of the COPY command. Number of data files should be equal oor multiple of the number of slices. 
-22. Large files can be compressed before loading - gzip, lzip, bzip2. File size should be even size as possible. File size after after split should be of size betweeen 1 MB to 1 GB. For optimum parallelism, the ideal size is between 1 MB and 125 MB after compression. The number of files should be a multiple of the number of slices in your cluster. 
-23. Manifest File - 
+15. Redshift support compression scheme at each column level. Compression scheme can be defined during table creation. AWS recomends automatic compression. Once data is loaded first time into the table, compression is automatically applied by AWS. Compression can be applied manually using analyze command. Analyse commands provide suggestion for compression and after that DDL hasto be updated manually.
+16. Table constraints (except NOT NULL) is not physically enforced in Redshift.
+17. Data in s3 can be easily loaded into Redshift using simple COPY command. Other than s3, data can be directly loaded from AWS EMR, EC2 instance and DynamoDB. Kinesis, Kinesis Firehose, AWS DMS loads data first to s3 before loading the same into Redshift. 
+18. Transfering data to AWS - upload to s3 over internet, Direct Connect, AWS Export/Import, Snowball/Snowmobil. 
+19. Splitting a lagre data file into smaller chunks enhances the performance of the COPY command. Number of data files should be equal or multiple of the number of slices. 
+20. Large files can be compressed before loading - gzip, lzip, bzip2. File size should be even size as possible. File size after after split should be of size betweeen 1 MB to 1 GB. For optimum parallelism, the ideal size is between 1 MB and 125 MB after compression. The number of files should be a multiple of the number of slices in your cluster. 
+21. Manifest File - 
       - Load required files only
       - Load from different s3 buckets
       - Load files with different prefix
       - Ensures data consistency when loaded from s3
 manifest is defined in JSON format. 
-24. File formats supported by COPY command - CSV, delimited, fixed width, JSON, Avro. 
-25. Error checking - STL_LOAD_ERRORS, STL_LOADERROR_DETAIL. These 2 tables can be joined for more detailed info. System tables and views do not use the same consistency model as regular tables. It is important to be aware of this issue when querying them, especially for STV tables and SVV views.
-26. UPSERT is not supported in Redshift. Need to use combination of delete & insert or update (by joining target & staging tables)
-27. COPY command can load encrypted files in s3. COPY command can load files encrypted using SSE s3, SSE-KMS; also supports client side encryption using client-side symmetric master key. SSE-C, client side encryption using KMS, client side encruption using asymmetric master key is not supported in COPY command. 
-28. UNLOAD command exports data to one or more files in s3. Automatically applies SSE-s3 encryption. UNLOAD supports SSE-KMS and client side encryption using customer-managed key (CSE-CMK). UNLOAD does not support SSE-C encryption.
-29. Redshift blocks are immutable; i.e. Updates result in a new block and Deleted rows are not removed from disk. VACUUM command recovers the storage space and sorts the data.
-30. Variations of VACUUM - FULL, SORT, DELETE ONLY, REINDEX. This operation is I/O intensive; hence should be run during the maintenance window. 
-31. Performing DEEP COPY on a very large table is much faster than running VACUUM command. DEEP COPY recreates and populates the table with a bulk insert. VACUUM command is not recomended on a table of size > 700 GB.
-32. Redshift snapshots can be automated or manual. Automatic snapshot is taken every 8 hours or every 5 GB of data change. Redshift also allows cross-region snapshot/backup. 
-33. If the Redshift cluster is encryted then snapshot will also be encrypted. When Redshift is restored from a snapshot a new cluster is created using same configuration
-34. AWS RedShift Cluster Key Concepts - https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes
-35. Amazon Redshift Best Practices for Designing Queries - https://docs.aws.amazon.com/redshift/latest/dg/c_designing-queries-best-practices.html
-36. RDS PostgreSQL can query data from RedShift using extensions. There are 2 extensions -
+22. File formats supported by COPY command - CSV, delimited, fixed width, JSON, Avro. 
+23. Error checking - STL_LOAD_ERRORS, STL_LOADERROR_DETAIL. These 2 tables can be joined for more detailed info. System tables and views do not use the same consistency model as regular tables. It is important to be aware of this issue when querying them, especially for STV tables and SVV views.
+24. UPSERT is not supported in Redshift. Need to use combination of delete & insert or update (by joining target & staging tables)
+25. COPY command can load encrypted files in s3. COPY command can load files encrypted using SSE s3, SSE-KMS; also supports client side encryption using client-side symmetric master key. SSE-C, client side encryption using KMS, client side encruption using asymmetric master key is not supported in COPY command. 
+26. UNLOAD command exports data to one or more files in s3. Automatically applies SSE-s3 encryption. UNLOAD supports SSE-KMS and client side encryption using customer-managed key (CSE-CMK). UNLOAD does not support SSE-C encryption.
+27. Redshift blocks are immutable; i.e. Updates result in a new block and Deleted rows are not removed from disk. VACUUM command recovers the storage space and sorts the data.
+28. Variations of VACUUM - FULL, SORT, DELETE ONLY, REINDEX. This operation is I/O intensive; hence should be run during the maintenance window. 
+29. Performing DEEP COPY on a very large table is much faster than running VACUUM command. DEEP COPY recreates and populates the table with a bulk insert. VACUUM command is not recomended on a table of size > 700 GB.
+30. Redshift snapshots can be automated or manual. Automatic snapshot is taken every 8 hours or every 5 GB of data change. Redshift also allows cross-region snapshot/backup. 
+31. If the Redshift cluster is encryted then snapshot will also be encrypted. When Redshift is restored from a snapshot a new cluster is created using same configuration
+32. AWS RedShift Cluster Key Concepts - https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes
+33. Amazon Redshift Best Practices for Designing Queries - https://docs.aws.amazon.com/redshift/latest/dg/c_designing-queries-best-practices.html
+34. RDS PostgreSQL can query data from RedShift using extensions. There are 2 extensions -
       - PostgreSQL fdw (Foreign Data Wrapper) - This extension is very slow for large number of rows.
       - Dblink - This extension pushes all the query complexity to RedShift
       https://aws.amazon.com/blogs/big-data/join-amazon-redshift-and-amazon-rds-postgresql-with-dblink/
-37. If your data has a fixed retention period, you can organize your data as a sequence of time-series tables. In such a sequence, each table is identical but contains data for different time ranges.
-38. AWS RedShift Blogs (Imp)-
+35. If your data has a fixed retention period, you can organize your data as a sequence of time-series tables. In such a sequence, each table is identical but contains data for different time ranges.
+36. AWS RedShift Blogs (Imp)-
 - https://aws.amazon.com/blogs/big-data/run-mixed-workloads-with-amazon-redshift-workload-management/
       
-39. Amazon Redshift Advisor Recommendations<a name="advisor-recommendations"></a>
+37. Amazon Redshift Advisor Recommendations<a name="advisor-recommendations"></a>
 Amazon Redshift Advisor offers recommendations about how to optimize your Amazon Redshift cluster to increase performance and save on operating costs. 
 
 + [Compress Table Data](#cluster-compression-recommendation)
