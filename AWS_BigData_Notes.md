@@ -43,7 +43,7 @@ Note: Consumer Classic - 2 MB/Sec read capacity per shard across all consumers
       e. Kinesis Firehose
       f. 3rd Party Libraries (Spark, Log4j, Flume, Kafka Connect etc.)
 18. This is a Java first client lirary but exists for other progamming language as well (Python, .Net etc.). Share multiple shards with multiple consumers in one group - Shard Discovery.
-19. KCL provides checkpointing capability. KCL uses DynamoDB for checkpointing and co-ordination. Sufficient RCU and WCU should be provisioned in DynamoDB to avoid slow-down.
+19. KCL provides checkpointing capability. KCL uses DynamoDB for checkpointing and co-ordination. Sufficient RCU and WCU should be provisioned in DynamoDB to avoid slow-down. For each Amazon Kinesis Data Streams application, the KCL uses a unique Amazon DynamoDB table to keep track of the application's state. Because the KCL uses the name of the Amazon Kinesis Data Streams application to create the name of the table, each application name must be unique.
 20. Kinesis Connector Library is a old (2016) Java library that leverages KCL. Kinesis Client Library runs on a EC2 instance and it can write data to following -
       a. Amazon S3
       b. Amazon DynamoDB
@@ -93,6 +93,12 @@ You can also join streams. For examples of joining streams, see Streaming Data O
 - Tumbling Windows: A query that aggregates data using distinct time-based windows that open and close at regular intervals.
 
 - Sliding Windows: A query that aggregates data continuously, using a fixed time or rowcount interval.
+
+### Kinesis Video Stream
+
+1. Video Stram APIs -
+- Producer API (PutMedia)
+- Consumer API (GetMedia, GetMediaFromFragmentList)
  
  
 ## Simple Queue Service (SQS):
@@ -630,6 +636,18 @@ This version allows encryption at rest
 - Word Cloud - Word or Phrase frequency. Size of word/phrase represents the frequency
 13. QuickSight supported data sources - https://docs.aws.amazon.com/quicksight/latest/user/supported-data-sources.html
 14. Row Level Security - https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html#create-data-set-rules-for-row-level-security
+15. You can use the join interface in Amazon QuickSight to join tables from one or more data sources. By using Amazon QuickSight to join the data, you can merge disparate data without duplicating the data from different sources to a centralized data store.
+The following limitations apply to joins:
+
+- For joins of multiple data sources, the result set is a SPICE data set.
+
+- For joins of multiple data sources, there's no size restriction on the data that you use to create the data set. You should always begin the join with your largest table. Often, this is a fact table. The rest of the tables combined must total less than 1 GB in size.
+
+- You can't join on calculated fields that you created in Amazon QuickSight.
+
+- You can't join on fields that use the geospatial data type.
+
+- You can't use a custom SQL query in a join between multiple data sources. To use custom SQL to join tables from different data sources, create the join before importing to Amazon QuickSight.
 
 ## AWS Athena
 
