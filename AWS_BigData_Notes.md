@@ -648,6 +648,18 @@ The following limitations apply to joins:
 - You can't join on fields that use the geospatial data type.
 
 - You can't use a custom SQL query in a join between multiple data sources. To use custom SQL to join tables from different data sources, create the join before importing to Amazon QuickSight.
+16. You can refresh your SPICE data sets at any time. Refreshing imports the data into SPICE again, so the data includes any changes since the last import.
+
+You can refresh SPICE data by taking any of the following approaches:
+
+- You can use the options on the Your Data Sets page.
+- You can refresh a data set during data preparation.
+- You can schedule refreshes of the data.
+
+For data that is not stored in SPICE, you can do the following:
+
+- To refresh file-based data, you must delete and recreate the data set.
+- To refresh data from a database, reopen your data set or the visualization you created.
 
 ## AWS Athena
 
