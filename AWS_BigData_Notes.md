@@ -167,6 +167,24 @@ Athena does not support SSE with customer-provided keys (SSE-C), nor does it sup
 4. Regardless of whether you use options for encrypting data at rest in Amazon S3, transport layer security (TLS) encrypts objects in-transit between Athena resources and between Athena and Amazon S3. Query results that stream to JDBC or ODBC clients are encrypted using TLS.
 5. Users need to have additional IAM permission for AWS KMS to access the data in s3 encrypted by AWS KMS encryption key. 
 6. In addition to encrypting data at rest in Amazon S3, Amazon Athena uses Transport Layer Security (TLS) encryption for data in-transit between Athena and Amazon S3, and between Athena and customer applications accessing it.
+7. When using Athena with the AWS Glue Data Catalog, you can use AWS Glue to create databases and tables (schema) to be queried in Athena, or you can use Athena to create schema and then use them in AWS Glue and related services. This topic provides considerations and best practices when using either method.
+8. Under the hood, Athena uses Presto to execute DML statements and Hive to execute the DDL statements that create and modify schema. With these technologies, there are a couple of conventions to follow so that Athena and AWS Glue work well together.
+9. Using Multiple Data Sources with Crawlers:
+When an AWS Glue Crawler scans Amazon S3 and detects multiple directories, it uses a heuristic to determine where the root for a table is in the directory structure, and which directories are partitions for the table\. In some cases, where the schema detected in two or more directories is similar, the crawler may treat them as partitions instead of separate tables\. One way to help the crawler discover individual tables is to add each table's root directory as a data store for the crawler\.
+
+The following partitions in Amazon S3 are an example:
+
+```
+s3://bucket01/folder1/table1/partition1/file.txt
+s3://bucket01/folder1/table1/partition2/file.txt
+s3://bucket01/folder1/table1/partition3/file.txt
+s3://bucket01/folder1/table2/partition4/file.txt
+s3://bucket01/folder1/table2/partition5/file.txt
+```
+
+If the schema for `table1` and `table2` are similar, and a single data source is set to `s3://bucket01/folder1/` in AWS Glue, the crawler may create a single table with two partition columns: one partition column that contains `table1` and `table2`, and a second partition column that contains `partition1` through `partition5`\.
+
+To have the AWS Glue crawler create two separate tables, set the crawler to have two data sources, `s3://bucket01/folder1/table1/` and `s3://bucket01/folder1/table2`, as shown in the following procedure\.
 
 ## AWS IoT
 
@@ -318,6 +336,18 @@ The provisioned replicated write capacity units \(rWCUs\) on every replica table
 14. Tez is a framework to enhance the performance to Hive. Tez is faster than MapReduce. Hive can connect to s3 and DynamoDB. Hive data can be joined with data in DynamoDB table using EMR DynamoDB connector.
 15. Presto is a in memory distributed fast SQL query engine. It is faster than Hive. It is sort of data virtualisation application; has connectors for various Hadoop applications.
 16. Presto is not a database, requires lot of memory...not good for batch job. It is good for interactive query.
+### EMR Security
+1. EMR has 2 types of security groups -
+- EMR Managed Security Group
+- Additional Security Group
+When a cluster is launched, 2 security groups are required to be selected; one for the Master and one for Core & Task nodes. User can either select default security group or can select select a different security group. A non-default security group isolates the cluster from other clustrs in the same account. The additional security group allows user to attach additional security rules without touching the EMR Managed Security Group.
+
+2. EMR has 3 types of Roles -
+- EMR Role - Allows EMR service to access EC2
+- EC2 Instance Profile - Allows EC2 instances in the cluster to access S3, DynamoDB etc.
+- Auto Scaling Role - Allows autoscaling service to add or remove nodes
+
+3. Custom Roles allows to achieve more complex requirement - i.e. attach roles to generate KMS keys to encrypt the cluster.
 
 ### EMR File Formats:
 
@@ -380,6 +410,7 @@ Compression formats comparison -
 Key Highlights
 - Gzip is a good choice as compression codec for cold data. Gzip compressed files are not splittable
 - Snappy and Gzip are most commonly used compression techniques. Snappy is preferred over Gzip.
+- Snappy does not support splitting either.
 
 
 ## AWS Machine Learning
@@ -660,27 +691,6 @@ For data that is not stored in SPICE, you can do the following:
 
 - To refresh file-based data, you must delete and recreate the data set.
 - To refresh data from a database, reopen your data set or the visualization you created.
-
-## AWS Athena
-
-1. When using Athena with the AWS Glue Data Catalog, you can use AWS Glue to create databases and tables (schema) to be queried in Athena, or you can use Athena to create schema and then use them in AWS Glue and related services. This topic provides considerations and best practices when using either method.
-2. Under the hood, Athena uses Presto to execute DML statements and Hive to execute the DDL statements that create and modify schema. With these technologies, there are a couple of conventions to follow so that Athena and AWS Glue work well together.
-3. Using Multiple Data Sources with Crawlers:
-When an AWS Glue Crawler scans Amazon S3 and detects multiple directories, it uses a heuristic to determine where the root for a table is in the directory structure, and which directories are partitions for the table\. In some cases, where the schema detected in two or more directories is similar, the crawler may treat them as partitions instead of separate tables\. One way to help the crawler discover individual tables is to add each table's root directory as a data store for the crawler\.
-
-The following partitions in Amazon S3 are an example:
-
-```
-s3://bucket01/folder1/table1/partition1/file.txt
-s3://bucket01/folder1/table1/partition2/file.txt
-s3://bucket01/folder1/table1/partition3/file.txt
-s3://bucket01/folder1/table2/partition4/file.txt
-s3://bucket01/folder1/table2/partition5/file.txt
-```
-
-If the schema for `table1` and `table2` are similar, and a single data source is set to `s3://bucket01/folder1/` in AWS Glue, the crawler may create a single table with two partition columns: one partition column that contains `table1` and `table2`, and a second partition column that contains `partition1` through `partition5`\.
-
-To have the AWS Glue crawler create two separate tables, set the crawler to have two data sources, `s3://bucket01/folder1/table1/` and `s3://bucket01/folder1/table2`, as shown in the following procedure\.
 
 ## Storage Gateway:
 1. AWS Storage Gateway connects an on-premises software appliance with cloud-based storage to provide seamless integration with data security features between your on-premises IT environment and the AWS storage infrastructure. You can use the service to store data in the AWS Cloud for scalable and cost-effective storage that helps maintain data security.
