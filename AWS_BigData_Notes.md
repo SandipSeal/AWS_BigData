@@ -348,6 +348,9 @@ When a cluster is launched, 2 security groups are required to be selected; one f
 - Auto Scaling Role - Allows autoscaling service to add or remove nodes
 
 3. Custom Roles allows to achieve more complex requirement - i.e. attach roles to generate KMS keys to encrypt the cluster.
+4. EMR cluster can be launched in a private subnet within a VPC. An S3 endpoint will be required to connect to S3 from the EMR cluster; similarly NAT instance will be required to connect to KMS, DynamoDB etc.
+5. EMR encryption at rest and in transit -
+![EMR_Encryption](https://github.com/SandipSeal/AWS_BigData/blob/master/emr-encryption.png)
 
 ### EMR File Formats:
 
@@ -544,7 +547,7 @@ Key Highlights
 - VPC provides network isolation
 - Cluster security groups
 - Encryption in flight using the JDBC driver enabled with SSL
-- Encryption at rest using KMS or an HSM device (establish a connection)
+- Encryption at rest using KMS or an HSM device (establish a connection). HSM can be on-prem or CloudHSM. Encryption at rest, encrypts the data blocks, system metadata and snapshots. Encryption in RedShist is immutable.
 - Supports S3 SSE using default managed key
 - Use IAM Roles for Redshift
 - To access other AWS Resources (example S3 or KMS)
