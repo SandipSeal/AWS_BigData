@@ -415,6 +415,14 @@ Key Highlights
 - Snappy and Gzip are most commonly used compression techniques. Snappy is preferred over Gzip.
 - Snappy does not support splitting either.
 
+## AWS Machine Type
+
+1. T2,T3,M4,M5 - General purpose. Webserver etc.
+2. C4, C5 - Compute optimised. Batch processing, Machine/Deep Learning
+3. R4, R5, X1, Z1 - Memory Optimised. In-memory database, Big data processing and analytics
+4. P2,P3,G3,F1 - Accelerated Computing. GPU instances, Machine/Deep Learning
+5. H1,I3,D2 - Storage optimised. HDFS, MapReduce, Kafka, Redshift
+
 
 ## AWS Machine Learning
 
