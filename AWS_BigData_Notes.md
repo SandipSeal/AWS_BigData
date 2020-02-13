@@ -351,6 +351,14 @@ When a cluster is launched, 2 security groups are required to be selected; one f
 4. EMR cluster can be launched in a private subnet within a VPC. An S3 endpoint will be required to connect to S3 from the EMR cluster; similarly NAT instance will be required to connect to KMS, DynamoDB etc.
 5. EMR encryption at rest and in transit -
 ![EMR_Encryption](https://github.com/SandipSeal/AWS_BigData/blob/master/emr-encryption.png)
+6. When encryption at rest is enabled for EMR cluster using the console, below 2 files get updated -
+- core-site.xml [hadoop.rpc.protection=privacy]
+- hdfs-site.xml [dfs.encrypt.data.transfer=true]
+7. When encryption at transit is enabled, EMR encrypts the data in transit for Hadoop, Tez & Spark. Following files are updated to enable encryption in transit:
+- core-site.xml
+- mapred-site.xml
+- tez-site.xml
+- spark-defaults.conf
 
 ### EMR File Formats:
 
