@@ -228,6 +228,10 @@ AWS IoT Architecture:
 - It is a JSON document representing the state of a connected device(Thing)
 - We can set the state to different desired states
 
+### Device Shadow Service:
+
+- Provides persistent representations of your devices in the AWS Cloud. You can publish updated state information to a device's shadow, and your device can synchronize its state when it connects. Your devices can also publish their current state to a shadow for use by applications or other devices.
+
 ### Rules Engine:
 
 - Rules are defined on Message Broker (MQTT) topics.
