@@ -122,6 +122,11 @@ You can also join streams. For examples of joining streams, see Streaming Data O
 1. Video Stram APIs -
 - Producer API (PutMedia)
 - Consumer API (GetMedia, GetMediaFromFragmentList)
+2. You can monitor a Kinesis video stream using Amazon CloudWatch, which collects and processes raw data from Kinesis Video Streams into readable, near real\-time metrics\. These statistics are recorded for a period of 15 months, so that you can access historical information and gain a better perspective on how your web application or service is performing\. 
+
+In the Kinesis Video Streams Management Console, you can view CloudWatch metrics for a Kinesis video stream in two ways: 
++ In the **Dashboard** page, choose the **Video streams** tab in the **Account\-level metrics for Current Region** section\.
++ Choose the **Monitoring** tab in the video stream's details page\.
  
  
 ## Simple Queue Service (SQS):
@@ -333,6 +338,20 @@ The provisioned replicated write capacity units \(rWCUs\) on every replica table
 22. You can use Amazon CloudWatch to monitor the behavior and performance of a global table. Amazon DynamoDB publishes ReplicationLatency and PendingReplicationCount metrics for each replica in the global table.
 - ReplicationLatency—The elapsed time between when an updated item appears in the DynamoDB stream for one replica table, and when that item appears in another replica in the global table.
 - PendingReplicationCount—The number of item updates that are written to one replica table, but that have not yet been written to another replica in the global table.
+
+### Encryption at Rest: How It Works<a name="encryption.howitworks"></a>
+
+ Amazon DynamoDB encryption at rest encrypts your data using 256\-bit Advanced Encryption Standard \(AES\-256\), which helps secure your data from unauthorized access to the underlying storage\. 
+
+Encryption at rest integrates with AWS Key Management Service \(AWS KMS\) for managing the encryption key that is used to encrypt your tables\. 
+
+When creating a new table or switching the encryption keys on an existing table, you can choose one of the following customer master keys \(CMK\): 
++ AWS owned CMK – Default encryption type\. The key is owned by DynamoDB \(no additional charge\)\. 
++ AWS managed CMK – The key is stored in your account and is managed by AWS KMS \(AWS KMS charges apply\)\. 
+
+The AWS managed CMK provides these additional features:
++  You can view the CMK and its key policy\. \(You cannot change the key policy\.\) 
++  You can audit the encryption and decryption of your DynamoDB table by examining the DynamoDB API calls to AWS KMS using AWS CloudTrail\. 
 
 ## Elastic MapReduce:
 
