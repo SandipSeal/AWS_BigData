@@ -497,6 +497,8 @@ Key Highlights
 - AWS Polly - Text to Speech conversion
 - AWS SageMaker - Fully Managed ML service on AWS
 - Amazon Transcribe - Identifies speech is audio file and transcribe them in text
+2. Amazon Machine Learning (Amazon ML) is a robust, cloud-based service that makes it easy for developers of all skill levels to use machine learning technology. Amazon ML provides visualization tools and wizards that guide you through the process of creating machine learning (ML) models without having to learn complex ML algorithms and technology. Once your models are ready, Amazon ML makes it easy to obtain predictions for your application using simple APIs, without having to implement custom prediction generation code, or manage any infrastructure.
+3. https://docs.aws.amazon.com/machine-learning/latest/dg/amazon-machine-learning-key-concepts.html - IMP
 
 ## AWS CloudSearch
 
