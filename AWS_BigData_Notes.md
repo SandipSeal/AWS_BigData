@@ -214,6 +214,17 @@ If the schema for `table1` and `table2` are similar, and a single data source is
 
 To have the AWS Glue crawler create two separate tables, set the crawler to have two data sources, `s3://bucket01/folder1/table1/` and `s3://bucket01/folder1/table2`, as shown in the following procedure\.
 
+### Identity and Access Management in Athena<a name="identity-and-access-management-in-athena"></a>
+
+Amazon Athena uses AWS Identity and Access Management \(IAM\) policies to restrict access to Athena operations\.
+
+To run queries in Athena, you must have the appropriate permissions for the following:
++ Athena API actions including additional actions for Athena [workgroups](workgroups.md)\.
++ Amazon S3 locations where the underlying data to query is stored\. 
++ Metadata and resources that you store in the AWS Glue Data Catalog, such as databases and tables, including additional actions for encrypted metadata\. 
+
+If you are an administrator for other users, make sure that they have appropriate permissions associated with their user profiles\.
+
 ## AWS IoT
 
 AWS IoT Architecture:
