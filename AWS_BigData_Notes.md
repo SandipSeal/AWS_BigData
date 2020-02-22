@@ -831,19 +831,6 @@ manifest is defined in JSON format.
 36. AWS RedShift Blogs (Imp)-
 - https://aws.amazon.com/blogs/big-data/run-mixed-workloads-with-amazon-redshift-workload-management/
       
-37. Amazon Redshift Advisor Recommendations<a name="advisor-recommendations"></a>
-Amazon Redshift Advisor offers recommendations about how to optimize your Amazon Redshift cluster to increase performance and save on operating costs. 
-
-+ [Compress Table Data](#cluster-compression-recommendation)
-+ [Compress Amazon S3 File Objects Loaded by COPY](#cluster-compress-s3-recommendation)
-+ [Isolate Multiple Active Databases](#isolate-active-dbs-recommendation)
-+ [Reallocate Workload Management \(WLM\) Memory](#reallocate-wlm-recommendation)
-+ [Skip Compression Analysis During COPY](#skip-compression-analysis-recommendation)
-+ [Split Amazon S3 Objects Loaded by COPY](#split-s3-objects-recommendation)
-+ [Update Table Statistics](#update-table-statistics-recommendation)
-+ [Enable Short Query Acceleration](#enable-sqa-recommendation)
-+ [Replace Single\-Column Interleaved Sort Keys](#single-column-interleaved-sort-recommendation)
-+ [Alter Distribution Keys on Tables](#alter-diststyle-distkey-recommendation)
 ### Database Encryption for Amazon Redshift Using AWS KMS
 When you choose AWS KMS for key management with Amazon Redshift, there is a four-tier hierarchy of encryption keys. These keys, in hierarchical order, are the master key, a cluster encryption key (CEK), a database encryption key (DEK), and data encryption keys.
 
