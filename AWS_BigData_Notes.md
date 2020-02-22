@@ -828,7 +828,22 @@ manifest is defined in JSON format.
       - Dblink - This extension pushes all the query complexity to RedShift
       https://aws.amazon.com/blogs/big-data/join-amazon-redshift-and-amazon-rds-postgresql-with-dblink/
 35. If your data has a fixed retention period, you can organize your data as a sequence of time-series tables. In such a sequence, each table is identical but contains data for different time ranges.
+36. AWS RedShift Blogs (Imp)-
+- https://aws.amazon.com/blogs/big-data/run-mixed-workloads-with-amazon-redshift-workload-management/
       
+37. Amazon Redshift Advisor Recommendations<a name="advisor-recommendations"></a>
+Amazon Redshift Advisor offers recommendations about how to optimize your Amazon Redshift cluster to increase performance and save on operating costs. 
+
++ [Compress Table Data](#cluster-compression-recommendation)
++ [Compress Amazon S3 File Objects Loaded by COPY](#cluster-compress-s3-recommendation)
++ [Isolate Multiple Active Databases](#isolate-active-dbs-recommendation)
++ [Reallocate Workload Management \(WLM\) Memory](#reallocate-wlm-recommendation)
++ [Skip Compression Analysis During COPY](#skip-compression-analysis-recommendation)
++ [Split Amazon S3 Objects Loaded by COPY](#split-s3-objects-recommendation)
++ [Update Table Statistics](#update-table-statistics-recommendation)
++ [Enable Short Query Acceleration](#enable-sqa-recommendation)
++ [Replace Single\-Column Interleaved Sort Keys](#single-column-interleaved-sort-recommendation)
++ [Alter Distribution Keys on Tables](#alter-diststyle-distkey-recommendation)
 ### Database Encryption for Amazon Redshift Using AWS KMS
 When you choose AWS KMS for key management with Amazon Redshift, there is a four-tier hierarchy of encryption keys. These keys, in hierarchical order, are the master key, a cluster encryption key (CEK), a database encryption key (DEK), and data encryption keys.
 
@@ -872,20 +887,3 @@ This preceding process is only necessary if you enable copying of snapshots usin
 Before the snapshot is copied to the destination AWS Region, Amazon Redshift decrypts the snapshot using the master key in the source AWS Region and re-encrypts it temporarily using a randomly generated RSA key that Amazon Redshift manages internally. Amazon Redshift then copies the snapshot over a secure channel to the destination AWS Region, decrypts the snapshot using the internally managed RSA key, and then re-encrypts the snapshot using the master key in the destination AWS Region.
 
 For more information about configuring snapshot copy grants for AWS KMS-encrypted clusters, see Configuring Amazon Redshift to Use AWS KMS Encryption Keys Using the Amazon Redshift API and AWS CLI.
-
-36. AWS RedShift Blogs (Imp)-
-- https://aws.amazon.com/blogs/big-data/run-mixed-workloads-with-amazon-redshift-workload-management/
-      
-37. Amazon Redshift Advisor Recommendations<a name="advisor-recommendations"></a>
-Amazon Redshift Advisor offers recommendations about how to optimize your Amazon Redshift cluster to increase performance and save on operating costs. 
-
-+ [Compress Table Data](#cluster-compression-recommendation)
-+ [Compress Amazon S3 File Objects Loaded by COPY](#cluster-compress-s3-recommendation)
-+ [Isolate Multiple Active Databases](#isolate-active-dbs-recommendation)
-+ [Reallocate Workload Management \(WLM\) Memory](#reallocate-wlm-recommendation)
-+ [Skip Compression Analysis During COPY](#skip-compression-analysis-recommendation)
-+ [Split Amazon S3 Objects Loaded by COPY](#split-s3-objects-recommendation)
-+ [Update Table Statistics](#update-table-statistics-recommendation)
-+ [Enable Short Query Acceleration](#enable-sqa-recommendation)
-+ [Replace Single\-Column Interleaved Sort Keys](#single-column-interleaved-sort-recommendation)
-+ [Alter Distribution Keys on Tables](#alter-diststyle-distkey-recommendation)
