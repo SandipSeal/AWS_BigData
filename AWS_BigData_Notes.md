@@ -873,7 +873,6 @@ Before the snapshot is copied to the destination AWS Region, Amazon Redshift dec
 
 For more information about configuring snapshot copy grants for AWS KMS-encrypted clusters, see Configuring Amazon Redshift to Use AWS KMS Encryption Keys Using the Amazon Redshift API and AWS CLI.
 
-
 36. AWS RedShift Blogs (Imp)-
 - https://aws.amazon.com/blogs/big-data/run-mixed-workloads-with-amazon-redshift-workload-management/
       
