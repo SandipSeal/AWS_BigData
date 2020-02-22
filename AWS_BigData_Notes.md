@@ -778,6 +778,10 @@ For data that is not stored in SPICE, you can do the following:
 + **Stored volumes** – If you need low\-latency access to your entire dataset, first configure your on\-premises gateway to store all your data locally\. Then asynchronously back up point\-in\-time snapshots of this data to Amazon S3\.
 4. **Tape Gateway** – With a tape gateway, you can cost\-effectively and durably archive backup data in GLACIER or DEEP\_ARCHIVE\. A tape gateway provides a virtual tape infrastructure that scales seamlessly with your business needs and eliminates the operational burden of provisioning, scaling, and maintaining a physical tape infrastructure\. 
 
+## AWS CloudWatch
+
+- AWS performace monitoring tool. 
+
 ## Amazon Redshift:
 
 1. Fully managed data warehouse in AWS cloud. This is a petabyte scale, column oriented datastore.
