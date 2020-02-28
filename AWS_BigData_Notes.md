@@ -14,7 +14,7 @@
 6. Each shard can support 5 transaction (API calls) per second for reads, upto total read of 2 MB per second. 
 Note: Consumer Classic - 2 MB/Sec read capacity per shard across all consumers
       Consumer Enhanced Fan-Out - 2 MB/Sec read capacity per shard per enhanced consumer
-7. The total capacity of a stram is the sum of capacities of all the shards
+7. The total capacity of a stream is the sum of capacities of all the shards
 8. A partition key in a data record is a unicode string of max size 256 bytes. The sequence number is unique per partition key in a shard.
 9. Kinesis Data Stream supports following producers -
       a. SDK
