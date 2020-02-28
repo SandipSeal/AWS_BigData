@@ -393,6 +393,16 @@ The AWS managed CMK provides these additional features:
 14. Tez is a framework to enhance the performance to Hive. Tez is faster than MapReduce. Hive can connect to s3 and DynamoDB. Hive data can be joined with data in DynamoDB table using EMR DynamoDB connector.
 15. Presto is a in memory distributed fast SQL query engine. It is faster than Hive. It is sort of data virtualisation application; has connectors for various Hadoop applications.
 16. Presto is not a database, requires lot of memory...not good for batch job. It is good for interactive query.
+17. If number of jobs per day * (time to setup cluster including Amazon S3 data load time if using Amazon S3 + data
+processing time) < 24 hours, consider transient Amazon EMR clusters. 
+or
+If (time to load data from Amazon S3 to HDFS + number of jobs per day) * data processing time
+< 24 hours, consider transient Amazon EMR clusters. 
+18. If number of jobs per day * (time to setup cluster including Amazon S3 data load time if using Amazon S3 + data
+processing time) > 24 hour, you may want to use persistent Amazon EMR clusters
+Or
+If time to load data from Amazon S3 to HDFS + number of jobs per day * data processing time
+> 24 hours, you may want to use persistent Amazon EMR clusters. 
 ### EMR Security
 1. EMR has 2 types of security groups -
 - EMR Managed Security Group
