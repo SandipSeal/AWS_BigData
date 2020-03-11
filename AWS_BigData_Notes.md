@@ -792,6 +792,10 @@ For data that is not stored in SPICE, you can do the following:
 
 - AWS performace monitoring tool. 
 
+## AWS ElasticSearch
+
+1. 
+
 ## Amazon Redshift:
 
 1. Fully managed data warehouse in AWS cloud. This is a petabyte scale, column oriented datastore.
